@@ -18,7 +18,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Deep in the Tank
+title: Blogchamp
 email: thomas.chen@columbia.com
 description: >- # this means to ignore newlines until "baseurl:"
   Thomas's blog for research, shower-thoughts, life reflections, and informal lectures.
