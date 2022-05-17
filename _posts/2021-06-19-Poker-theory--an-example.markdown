@@ -6,11 +6,11 @@ categories: jekyll update
 ---
 ## Introduction
 
-This article aims to explain game theory principles in Poker and provide intuitive heuristics to apply these principles in your game.
+This article aims to explain game theory principles in Poker and provide intuitive heuristics to apply in your game.
 
 Poker is an imperfect information game as players don't know each others' hole cards. In many ways, this makes poker harder than perfect-information games (where players see the entire game state), such as Tic-tac-toe and chess, because of the ability to bluff. 
 
-Bluffing makes your strategic considerations dependent on your private information and your opponents' strategies. "What does my opponent think that I think that they have?" is the type of "K-level" thinking that bluffing enables. To describe what is optimal in poker, we need the following game theoretic concepts:
+Bluffing makes your strategic considerations dependent on your private information and your opponents' strategies. Not only do your strategic considerations become probabilistic (due to a lack of information), they also become "K-level". "What does my opponent think that I think that they have?" is the type of "K-level" thinking that bluffing induces. Thus, to describe what is optimal in poker, we need the following game theoretic concepts:
 
 - expected value (EV)
 - best response (BR)
@@ -22,7 +22,7 @@ as well as some useful poker-specific concepts:
 - polarization
 - balancing bluffs
 
-We will illustrate these concepts by providing a principled analysis of the following simplified poker game. TLDR, the 3 key takeaways are: 
+We will illustrate these concepts by providing a principled analysis of a simplified poker game. TLDR, the 3 key takeaways are: 
 
 1. Playing a NE strategy is optimal in the sense that there isn't a strategy your opponent can deviate to that wins against you in expectation. However, since no one plays a perfect NE, there are exploitative strategies that make more money against certain opponents. A NE strategy serves as a solid baseline strategy, from which you can deviate to exploit if you see an opportunity.
 
@@ -33,9 +33,13 @@ We will illustrate these concepts by providing a principled analysis of the foll
 
 Feel free to skip to the last section for practical strategic tips if you don't want to read the analysis below. 
 
-## Rules and Terminology
+## Rules of NLH
 
-Rules -- We'll restrict ourselves to two player No-Limit Hold'em, where both players are dealt 2 cards, and there are up to 5 community cards in the middle. You make 5-card hands with your private cards and the community cards, and you win by either making the best 5-card hand or by making the opponent fold. There are 4 rounds of betting-- preflop, flop, turn, and river. After the preflop round, 3 cards are dealt out (the flop), and the flop betting round commences. After this, the 4th card (the turn card) comes, followed by a betting round. Finally, the 5th  card (the river card) is dealt, followed by one final round of betting.
+This section provides the rules for the _full_ No-limit Hold'em (NLH) game. This is not the simplified game we are analyzing, but the rules are included for the reader's context.
+
+NLH Rules -- In two player No-Limit Hold'em, both players are dealt 2 cards, and there are up to 5 community cards in the middle. You make 5-card hands with your private cards and the community cards, and you win by either making the best 5-card hand or by making the opponent fold. There are 4 rounds of betting-- preflop, flop, turn, and river. After the preflop round, 3 cards are dealt out (the flop), and the flop betting round commences. After this, the 4th card (the turn card) comes, followed by a betting round. Finally, the 5th  card (the river card) is dealt, followed by one final round of betting.
+
+## Useful Terminology
 
 Position -- you have position when you act after your opponent. This is an advantage because you can see what they do before making your decision.
 
@@ -43,23 +47,24 @@ IP -- in position (acting last)
 
 OOP -- out of position (acting first)
 
-Equity -- A player's equity is their chance of winning the hand by making the best hand by showdown (excluding the chance of winning by making the opponent fold)
+Equity -- A player's equity is their chance of winning the hand by making the best hand by showdown (i.e. not by causing the opponent to fold)
 
 EV -- An action or strategy's EV is how much money you make in expectation by playing it.
 
-Nutted hand -- a really strong hand
+Nutted hand -- a hand whose strength is among the strongest possible
 
+We now present a simplified poker game that we can analyze by hand.
 
 ## A Simplified Poker Game
 
 `Definition 1.1 (Poker River Game):` There are two players, P1 (Alice) and P2 (Bob). To start, there is 100 in the pot and both players have a 100 stack. P1 goes first, choosing either to check (x) or to bet (b) any amount. If P1 checks, P2 can check (x), or bet (b). If P1 bets, P2 can fold (f), call (c), or raise (r). Action alternates in this way, until one player either folds or calls. In the latter case, the player with the better hand wins (showdown).
 
 
-First, because of a given player receives limited information about the other player's possible hands, we need the notion of a _range_, to describe the possible hands their opponent could have, along with what probability they estimate their opponent to have it, based on the information they have. 
+First, because a player receives limited information about the other player's possible hands, we need the notion of a _range_ to describe the possible hands their opponent could have, along with what probability they estimate their opponent to have it, based on the information they have. 
 
 `Definition 1.2 (Poker Range):` A player's range is a probability distribution over the cards they can have. Ranges, as perceived by an opponent, depend on the opponent's current information set: their private cards, the public cards, and both players' actions and position in the hand.
 
-We will study the Poker River Game where, at the start of the game, P1 has range $$ \{AA : 0.5, QQ : 0.5\} $$ (i.e. AA or QQ with equal probability), while P2 has range $$\{KK : 1.0\}$$. Let's further assume that both players know each others ranges and strategies perfectly, so that they can instanteously adjust their own strategies in response (We will comment on under what circumstances these are reasonable assumptions later).
+We will study the Poker River Game where, at the start of the game, P1 has range $$ \{AA : 0.5, QQ : 0.5\} $$ (i.e. AA or QQ with equal probability), while P2 has range $$\{KK : 1.0\}$$. Let's further assume that both players know each others ranges and strategies perfectly, so that they can instanteously adjust their own strategies in response to their opponent (Later, we will comment on the circumstances where these are reasonable assumptions).
 
 
 
@@ -69,7 +74,7 @@ We will study the Poker River Game where, at the start of the game, P1 has range
 
 `Naive Suboptimal Strategy 1.3 (P1 always bets):`
 
-Suppose P1's strategy was to bet 100% of her hands, for an amount $$x \leq 100$$. Against P1's betting range, $$ \{AA : 0.5, QQ : 0.5\} $$, P2 wins 50% of the time, when against QQ (winning $100 pot + $100 bet), and loses the other 50% of the time, when against AA (losing $100). With this, P2 has a simple counter strategy to win in expectation against P1: to call 100% of his hands. The expected value of P2's strategy is:
+Suppose P1's strategy was to bet 100% of her hands, for an amount $$x \leq 100$$. Against P1's betting range, $$ \{AA : 0.5, QQ : 0.5\} $$, P2 wins 50% of the time, when against QQ (winning 100 pot + 100 bet), and loses the other 50% of the time, when against AA (losing $100). With this, P2 has a simple counter strategy to win in expectation against P1: to call 100% of his hands. The expected value of P2's strategy is:
 
 $$EV_2 = 0.5 (200) + 0.5 (-100) = $50$$
 
@@ -88,7 +93,7 @@ _Proof Sketch of 1.5:_
 
 Note that if both players checked, they'd each win 50% of the time. That is, their ranges' equities are each 50%. Put another way, the average strength of hands in their ranges are the same. However, the key difference between P1 and P2's ranges is that P1's range contains hands that are both stronger and weaker than P2's range. We say that P1's range is polarized. 
 
-Polarization is relevant because there are two incentives to betting: betting to get called by a worse hand or betting to fold outo a better hand. Suppose P2 bets. Because both players know each others' ranges, P1 will never call with QQ and will always call with AA. This simple counter strategy against P2's bet ensures that P2 never gets called by a worse hand (QQ) and never gets a better hand to fold (AA). Because P2's bet accomplishes nothing, P2 will always check if P1 checks to them. 
+Polarization is relevant because there are two incentives to betting: betting to get called by a worse hand or betting to fold outo a better hand. Suppose P2 bets. Because both players know each others' ranges, P1 will never call with QQ and will always call with AA. This simple counter strategy against P2's bet ensures that P2 never gets called by a worse hand (QQ) and never gets a better hand to fold (AA). Because P2's bet accomplishes nothing, P2 will always check if P1 checks to him. 
 
 More generally, its true in poker that the player that is polarized has incentive to bet while the player that's condensed has incentive to check. **Key Concept 1**. We now return to the main claim.
 
@@ -107,13 +112,13 @@ Let's return to the incentives of P1's hands. AA wants to get called by P2's wor
 
 However, a basic feature about mixed nash equilibrium is that the EV of the mixed NE should be at least the EV of any pure strategy. In order for P1 to play a NE, she must bet in a way that makes the EV that P2 attains through calling or folding equal. That is, if P1 wants to play an unexploitable betting strategy, she needs to make P2 indifferent to calling or folding. **Key Concept 2**
 
-With a stack size of 100 and pot size of 100, it turns out that she should bet so that the ratio of value to bluff hands is 2:1. This betting strategy will yield an EV of 75, 25 more than the bet-all or bet-none strategies.
+Given these stack sizes and pot size, to make P2 indifferent, P1 should bet so that the ratio of value to bluff hands is 2:1. This betting strategy will yield an EV of 75, 25 more than the bet-all or bet-none strategies.
 
 **P2's NE strategy**
 
 With P1 playing this strategy, P2's EV for calling or folding are equal. This means P2 can play either with any probability, right?
 
-No. Suppose P2 called 100% of the time. Then P1 can adjust her strategy to only bet with AA and check all QQ, yielding an EV of:
+Actually, no. Suppose P2 called 100% of the time. Then P1 can adjust her strategy to only bet with AA and check all QQ, yielding an EV of:
 
 $$EV_1 = 0.5 (200) + 0.5 * 0 = 100 > 75$$
 
@@ -134,7 +139,7 @@ We'll start by elaborating on the key concepts highlighted.
 
 However, to evaluate the utility of playing a NE strategy in practice, let's return to the assumptions we made. In particular, if you and I are playing a lot of hands together (10,000+), the following two assumptions become true.
 
-1. (Realizability) If my strategy is better than yours, I am able to realize that edge. After 10,000 hands, I will likely be up money by the law of large numbers.
+1. (Realizability) If my strategy has an edge on yours, I am able to realize that edge, by the law of large numbers.
 2. (Approximate Perfect Knowledge) Because we play so many hands, we can gauge approximately what the other person's strategy is at each spot: how often are they betting, with what sizing, and with what hands?. This means that if you are playing a highly exploitable strategy, after 10,000 hands your oppoonent will catch on, adjust, and exploit your strategy.
 
 Note that these two assumptions--that EV is all that matters and that we have perfect knowledge of the opponent's (mixed) strategy-- are assumptions we make in the game theoretic analysis above. Thus, in circumstances where we play a large number of hands against our opponent, it is important to play a sound game-theoretic strategy. In the 25,000 hand heads up challenge between Doug Polk and Daniel Negreanu, the reason Polk was over a 4:1 favorite was because he played a sounder GTO strategy.
@@ -150,28 +155,28 @@ We saw from claim 1.3 that it was highly suboptimal for Player 2 to bet into pla
 
 More generally, when you bet, you have two objectives: get called by worse hands or fold out better. If you can do neither, as when your opponent is polarized, you must check. This is why in single raised pots (SRPs), action is usually checked to the preflop aggressor. On most flops, the aggressor has more nutted hands in their range (Overpairs, top set, etc.), while the preflop caller has considerably fewer nutted hands, as they would have raised many of them preflop.
 
-The more general takeaway is that your optimal strategy is a mainly dependent on certain features of your range and their range (and whether you are in position). In the special case where your range is polarized, betting is heavily incentivized as your garbage can fold out better and your nuts can get called by worse. 
+The general takeaway is that your optimal strategy is a heavily dependent on certain features of your range and your opponent's range. In the special case where your range is perfectly polarized, betting is heavily incentivized as your garbage hands can fold out better and your nuts can get called by worse. 
 
-Of course, in No-Limit Hold'em most spots aren't perfectly polarized as in the toy game. Estimating the optimal play requires a lot of intuition-building by playing spots and studying them afterwards. But here's two simplified heuristics that capture the most important range considerations when deciding when to bet and how much:
+Of course, in No-Limit Hold'em most spots aren't perfectly polarized. Inferring the optimal play requires intuition that's built through practice and study. However, here's two simplified heuristics that capture the most important features of ranges for deciding when to bet and how much:
 
 1. Does my range have a nut advantage? That is, are my best hands stronger than my opponent's best hands?
 
 
 2. Does my range have an equity advantage? That is, on average, are my hands stronger than my opponent's hands?
 
-Let's first address how frequently you should bet, if at all.
+Using these two heuristics, let's first address how frequently you should bet, if at all.
 
-Regarding 1, we saw that in the toy game that players at a severe nut disadvantage should check. But unlike the toy game, where polarization is very cut and dry, it is usually less clear in real poker who has a nut advantage, as both players may have nutted hands in range (sets, two pairs, etc.). My recommendation is that as long as you aren't at a severe nut disadvantage, you can bet, and otherwise you should check. 
+Regarding heuristic 1, we saw that in the toy game that a player at a severe nut disadvantage should check. But unlike the toy game, where polarization is very cut and dry, it is usually less clear in real poker who has a nut advantage, as both players may have nutted hands in range (sets, two pairs, etc.). My recommendation is that as long as you aren't at a severe nut disadvantage, you are allowed bet, and otherwise you should check. 
 
-Assuming we can bet, we now need to decide betting frequency. Regarding 2, the larger your equity advantage, the more frequently you can bet. This is why in single raised pots, on a board like Ad Qh 3s, the preflop aggressor is betting close to 100% of range ("range betting"), often for a small size. 
+Assuming we can bet, we now need to decide betting frequency. Regarding heuristic 2, the larger your equity advantage, the more frequently you can bet. This is why in single raised pots, on a board like Ad Qh 3s, the preflop aggressor is betting close to 100% of range ("range betting"), often for a small size. 
 
-Conversely, if you are at equity disadvantage, you should check more frequently, even if you have the nut advantage. Very often on the turn (e.g. A-T-2-3), a player will have a nut advantage but an equity disadvantage, and as such will bet at a low frequency for a large sizing. This betting  pattern is called "turn polarization", where on the turn you only bet your very strongest hands along with some bluffs, for a very large sizing.
+Conversely, if you are at equity disadvantage, you should check more frequently, even if you have the nut advantage. For instance, often on the turn (e.g. A-T-2-3), the player who bet the flop will have a nut advantage but an equity disadvantage, and will bet at a low frequency for a large sizing. This betting  pattern is called "turn polarization", where on the turn you only bet your very strongest hands along with some bluffs, for a very large sizing.
 
 Now let's address how large you should bet.
 
-In general, you should only bet large if you have the nut advantage. Intuitively, if you don't have the nut advantage, you would like to keep the pot smaller, as you are under constant threat of being stacked by your opponent's best hands. Your opponent, who has the nut advantage, will put as much money into the pot as possible in order to put you in an uncomfortable spot. Thus, the larger your nut advantage, the larger you can bet.
+In general, you should only bet large if you have the nut advantage. Intuitively, if you don't have the nut advantage, you would like to keep the pot smaller, as you are under constant threat of being stacked by your opponent's best hands. In this event, your opponent would want to put as much money into the pot as possible in order to put you in an uncomfortable spot. TLDR, the larger your nut advantage, the larger you can bet.
 
-However, you also need to consider your betting frequency when you choose your bet size. In general, the more frequently you bet, the smaller your sizing should be, as it is usually highly exploitable if you bet large with a high frequency. That is, unless you have a significant nut and range advantage, such as when you're the preflop raiser on an AQ3 flop. Conversely, when you bet less frequently but have a nut advantage, you can choose to bet larger if you want.
+However, you also need to consider your betting frequency when you choose your bet size. In general, the more frequently you bet, the smaller your sizing should be, as it is usually highly exploitable if you bet large with a high frequency (unless you have a significant range and nut advantage). Conversely, when you bet less frequently but have a nut advantage, you have the option to bet larger.
 
 Here are some common examples of bet frequency and sizing:
 
@@ -210,7 +215,7 @@ Offline preparation:
 
 1. Choose two bet sizes: one "small" bet size (e.g. 1/3 pot) and one "large" bet size (e.g. 2/3 pot). Your subsequent decisionmaking will just be to decide whether you should check, bet small, or bet large.
 
-2. Memorize some preflop charts for single raised pots and 3bet pots--it's like knowing your chess openings.
+2. Memorize some preflop charts for single raised pots and 3bet pots. This is like knowing your chess openings--you don't want to have to deduce these in real time.
 
 
 In the moment, ask yourself the following questions:
@@ -219,16 +224,16 @@ In the moment, ask yourself the following questions:
 
 2. (Range Strategy) Roughly estimate your range and their range and ask yourself what your range wants to do in this spot. E.g. do I want to bet frequently and small, bet infrequently but large, etc. 
 
-3. (Hand Strategy) Ask yourself what your particular hand wants to do. If I have a nutted hand or a strong draw, I want to bet large to polarize. If I have a middling hand, I want check to get to showdown for cheap, for fear of betting and getting raised. Before you bet, always consider what will happen if your opponent puts in a raise: can my middling draw or middling showdown-value hand withstand a check-raise? If not, I should consider checking more.
+3. (Hand Strategy) Ask yourself what your particular hand wants to do. If I have a nutted hand or a strong draw, I want to bet large to polarize. If I have a middling hand, I want check to get to showdown for cheap, for fear of betting and getting raised. Before you bet, always consider what will happen if your opponent puts in a raise: can my middling draw or middling showdown-value hand withstand a check-raise? If not, I should consider checking more. In this way, you can determine your hand's strategy in the context of your range's strategy.
 
-4. (Estimating GTO Action) If your range allows you to bet, decide whether your current hand should be in the betting range.
+4. (Exploitative Considerations) Now consider any exploitative tells or tendencies you gleam from your opponent. If you think your reads are strong enough, consider deviating from your GTO baseline to exploit your opponent. There are a lot of good exploitative tells: 
 
-5. (Exploitative Considerations) Now consider any exploitative tells or tendencies you gleam from your opponent--E.g. if they always cbet flop with good hands, but here they check, then this signals extreme weakness. If you think your reads are strong enough, consider deviating from your GTO baseline. There are a lot of good exploitative tells: 
-- Bet timing (When you have a nutted hand, you sometimes have to think about whether betting or checking will be more profitable. If they bet quickly in a spot they should be thinking hard about, they're probably bluffing)
-- Bet sizing (Do they use different sizings when value-betting/bluffing? Some people size down when the value bet since they want to get called)
-- Intentional/Reverse Tells (This usually happens in big hands, but if they are acting weak in a hand they're heavily invested in, this signals strength. Vice versa if they're acting strong)
-- Table talk and interaction (A poker legend once said that if you smile at a player and they give you a genuine smile back, they're likely not bluffing)
-- Signs of disinterest (Usually if a player is on their phone at the beginning of a hand, they don't have anything good)
+- Exploitable Strategies: If they always cbet flop with their good hands, but on this flop they check, then this signals extreme weakness
+- Bet timing: When you have a nutted hand, you often have to think about whether betting or checking will be more profitable. Thus, if they bet quickly in a spot they should be thinking hard about, they're probably bluffing
+- Bet sizing: Do they use different sizings when value-betting versus bluffing? Some people size down when the value bet since they want to get called and size up because they want a fold. In another context, some people will bet full pot on the river when they have a strong hand they feel has not been adequately paid off; however, they would never airball bluff river with such a large sizing
+- Intentional/Reverse Tells: This usually happens in big hands, but if they are acting weak in a hand they're heavily invested in, this signals strength. Vice versa if they're acting strong
+- Table talk and interaction: A poker legend once said that if you smile at a player and they give you a genuine smile back, they're likely not bluffing
+- Early signs of disinterest: Usually if a player is on their phone at the beginning of a hand, they don't have anything good
 
 ## A Simple but Solid Strategy
 
@@ -260,8 +265,6 @@ The strategy above is a nice starting strategy-- better than "I flopped a pair, 
 
 
 ## Appendix
-
-
 
 `Claim 1.4 (Nash Equilibrium for Poker River Game):` P1's nash equilibrium (NE) strategy is to bet 100% of her AA and 50% of her QQ, and check the other 50% of her QQ. P2's NE strategy, when facing a bet, is to call 50% and fold 50%; and facing a check, P2 checks 100%. For this NE, 
 $$EV_1 = 75, EV_2 = 25$$
