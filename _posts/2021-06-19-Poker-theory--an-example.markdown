@@ -63,7 +63,7 @@ We will study the Poker River Game where, at the start of the game, P1 has range
 
 
 
-![img.png](/blog/images/river-game.png)
+![img.png](/images/river-game.png)
 
 
 
