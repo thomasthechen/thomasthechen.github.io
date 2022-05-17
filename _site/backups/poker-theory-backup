@@ -1,16 +1,59 @@
----
-layout: post
-title:  "Poker Theory Principles with an Example"
-date:   2021-06-19 17:27:18 -0700
-categories: jekyll update
----
-## Introduction $1100
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Poker Theory Principles | Blogchamp</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Poker Theory Principles" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Thomas’s blog for research, shower-thoughts, life reflections, and informal lectures." />
+<meta property="og:description" content="Thomas’s blog for research, shower-thoughts, life reflections, and informal lectures." />
+<link rel="canonical" href="http://localhost:4000/backups/poker-theory-backup" />
+<meta property="og:url" content="http://localhost:4000/backups/poker-theory-backup" />
+<meta property="og:site_name" content="Blogchamp" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-06-19T17:27:18-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Poker Theory Principles" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-06-19T17:27:18-07:00","datePublished":"2021-06-19T17:27:18-07:00","description":"Thomas’s blog for research, shower-thoughts, life reflections, and informal lectures.","headline":"Poker Theory Principles","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/backups/poker-theory-backup"},"url":"http://localhost:4000/backups/poker-theory-backup"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Blogchamp" /></head>
+<body><header class="site-header" role="banner">
 
-This article aims to explain the game theory principles in Poker, and to provide intuitive heuristics to applying these principles to improve your game.
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Blogchamp</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/backups/poker-theory-backup">Poker Theory Principles</a><a class="page-link" href="/resume.html">Resume</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Poker Theory Principles</h1>
+    <p class="post-meta"><time class="dt-published" datetime="2021-06-19T17:27:18-07:00" itemprop="datePublished">
+        Jun 19, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    ## Introduction
+
+This article aims to explain the game theory principles in Poker and provide intuitive heuristics to apply these principles in your game.
 
 Poker is an imperfect information game as players don't know each others' hole cards. In many ways, this makes poker harder than perfect-information games (where players see the entire game state), such as Tic-tac-toe and chess, because of the ability to bluff. 
 
-Bluffing makes strategic considerations probabilistic. E.g. instead computing "what if Nxe4", a poker player considers "What are the chances my opponent raises if I bet, and with what hands?". To describe what is optimal in poker, we need the following game theoretic concepts:
+Bluffing makes your strategic considerations dependent on your private information and your opponents' strategies. "What does my opponent think that I think that they have?" is the type of "K-level" thinking that bluffing enables. To describe what is optimal in poker, we need the following game theoretic concepts:
 
 - expected value (EV)
 - best response (BR)
@@ -22,19 +65,40 @@ as well as some useful poker-specific concepts:
 - polarization
 - balancing bluffs
 
-We will illustrate these concepts by providing a principled analysis of the following, simplified poker game:
+We will illustrate these concepts by providing a principled analysis of the following simplified poker game. TLDR, the 3 key takeaways are: 
+
+1. Playing a NE strategy is optimal in the sense that there isn't a strategy your opponent can deviate to that wins against you in expectation. However, since no one plays a perfect NE, there are exploitative strategies that make more money against certain opponents. A NE strategy serves as a solid baseline strategy, from which you can deviate to exploit if you see an opportunity.
+
+2. You and your opponent's ranges determine what your NE strategy should be. Polarization and Equity are two key features of ranges you need to consider in your decisionmaking: do you have more nutted hands than your opponent, and are your hands stronger on-average? You need at least one of these to justify betting.
+
+3. Betting has two purposes: getting value and denying equity from your opponent's hands. Regarding the latter, you should choose a sizing that makes a particular part of their range indifferent to calling or folding. Practically, this means you should know if you are targeting Ace-high, small pairs, top pairs, etc. when betting. E.g. when an IP raiser c-bets 1/3 pot on dry flops like K-7-2 rainbow, they're trying to get OOP's low pairs, ace highs, and worse to fold, which are a huge part of OOP's range. Finally, note that it's possible to bet for value and for equity denial at the same time–like betting large on turns to make flush draws fold.
+
+
+Feel free to skip to the last section for practical strategic tips if you don't want to read the analysis below. 
+
+## Rules and Terminology
+
+Rules -- We'll restrict ourselves to two player No-Limit Hold'em, where both players are dealt 2 cards, and there are up to 5 community cards in the middle. You make 5-card hands with your private cards and the community cards, and you win by either making the best 5-card hand or by making the opponent fold. There are 4 rounds of betting-- preflop, flop, turn, and river. After the preflop round, 3 cards are dealt out (the flop), and the flop betting round commences. After this, the 4th card (the turn card) comes, followed by a betting round. Finally, the 5th  card (the river card) is dealt, followed by one final round of betting.
+
+Position -- you have position when you act after your opponent. This is an advantage because you can see what they do before making your decision.
+
+IP -- in position (acting last)
+
+OOP -- out of position (acting first)
+
+
 
 ## A Simplified Poker Game
 
-`Definition 1.1 (Poker River Game):` There are two players, P1 (Alice) and P2 (Bob). To start, there is 100 in the pot and both players have a 100 stack. P1 goes first, choosing either to check (x) or to bet (b) any amount. If P1 checks, P2 can check (x), or bet (b). If P1 bets, P2 can fold (f), call (c), or raise (r). Action alternates in this way, until one player either folds or calls. In the latter case, the player with the better hand wins (showdown).
+`Definition 1.1 (Poker River Game):` There are two players, P1 (Alice) and P2 (Bob). To start, there is $100 in the pot and both players have a $100 stack. P1 goes first, choosing either to check (x) or to bet (b) any amount. If P1 checks, P2 can check (x), or bet (b). If P1 bets, P2 can fold (f), call (c), or raise (r). Action alternates in this way, until one player either folds or calls. In the latter case, the player with the better hand wins (showdown).
 
 First, because of a given player receives limited information about the other player's possible hands, we need the notion of a _range_, to describe the possible hands their opponent could have, along with what probability they estimate their opponent to have it, based on the information they have. 
 
-`Definition 1.2 (Poker Range):` For a given player A, let $$\Omega$$ be the set of hands A can have. Then a range is a probability distribution, $$p$$ over $$\Omega$$. Ranges are typically discussed in context of the the information set available: a player's private cards, the actions the players have made, and the public cards that have been dealt.
+`Definition 1.2 (Poker Range):` A player's range is a probability distribution over the cards they can have. Ranges, as perceived by an opponent, depend on the opponent's current information set: their private cards, the public cards, and both players' actions and position in the hand.
 
 We will study the Poker River Game where, at the start of the game, P1 has range $$ \{AA : 0.5, QQ : 0.5\} $$ (i.e. AA or QQ with equal probability), while P2 has range $$\{KK : 1.0\}$$. 
 
-`Naive Suboptimal Strategy 1.3 (P1 bets everything):`
+`Naive Suboptimal Strategy 1.3 (P1 always bets):`
 
 Suppose P1's strategy was to bet 100% of her hands, for an amount $$x \leq 100$$. Against P1's betting range, $$ \{AA : 0.5, QQ : 0.5\} $$, P2 wins 50% of the time, when against QQ (winning $100 pot + $100 bet), and loses the other 50% of the time, when against AA (losing $100). With this, P2 has a simple counter strategy to win in expectation against P1: to call 100% of his hands. The expected value of P2's strategy is:
 
@@ -154,21 +218,28 @@ When constructing your betting ranges in no limit holdem, you should have a targ
 
 
 
-## A Framework for Poker Decision-making
+## A Framework for Poker Decisionmaking
 
-When you have 10-20 seconds for each decision, it's important to have a structured decision making process that takes into account the most important information. Here is how I suggest doing that:
+When you have 10-20 seconds for each decision, it's important to have a structured decision making process that takes into account the most important information. 
+
+Offline preparation:
+
+1. Choose two bet sizes: one "small" bet size (e.g. 1/3 pot) and one "large" bet size (e.g. 2/3 pot). Your subsequent decisionmaking will just be to decide whether you should check, bet small, or bet large.
+
+2. Memorize some preflop charts for single raised pots and 3bet pots--it's like knowing your chess openings.
+
+
+In the moment, ask yourself the following questions:
 
 1. (Info Recap) Recap the important information. What actions you took, what actions they took, what cards came down, what position you are in (IP or OOP).
 
-2. (Range Strategy) Make a rough estimate your range and their range, and ask yourself what your range wants to do in this spot. E.g. do I want to bet frequently and small, bet infrequently but large, etc. 
+2. (Range Strategy) Roughly estimate your range and their range and ask yourself what your range wants to do in this spot. E.g. do I want to bet frequently and small, bet infrequently but large, etc. 
 
-3. (Hand Strategy) Ask yourself what your hand wants to do. If I have a nutted hand or a strong draw, I want to bet large to polarize. If I have a middling hand, I want check to get to showdown for cheap, beause of fear of betting and getting raised. To this point, always consider what will happen for your hand if you take an action and your opponent puts in more aggression: can my middling draw or middling showdown-value hand withstand a check raise? If not, I should consider checking more.
+3. (Hand Strategy) Ask yourself what your particular hand wants to do. If I have a nutted hand or a strong draw, I want to bet large to polarize. If I have a middling hand, I want check to get to showdown for cheap, beause of fear of betting and getting raised. To this point, always consider what will happen for your hand if you take an action and your opponent puts in more aggression: can my middling draw or middling showdown-value hand withstand a check raise? If not, I should consider checking more.
 
-4. (Estimating GTO Action) If your range allows you to bet, then decide whether your current hand should be in the betting range.
+4. (Estimating GTO Action) If your range allows you to bet, decide whether your current hand should be in the betting range.
 
 5. (Exploitative Considerations) Now consider any exploitative tells or tendencies of your opponent (e.g. if they always cbet flop with good hands, but here they check, then this signals extreme weakness). If you think your reads are strong enough, consider deviating from your GTO baseline. There are also a lot of good exploitative tells: bet sizing, bet timing (if they bet quickly in a spot they should be thinking hard about, they're probably bluffing), general demeanor (acting weak signals strength, and vice versa), and table talk.
-
-6. Make your decision. If you still can't decide on what to do, lean toward the safer option.
 
 ## A Simple, but Solid Strategy
 
@@ -193,7 +264,40 @@ On the flop, you want to be polarized when you bet, betting your strongest hands
 
 If we check flop and are checked to on the turn, then intuitively the opponent's range is generally weaker than it would be had they bet. Against this weaker range, we can start betting our medium strength hands for value, and our weak draws as bluffs, again with the aim of polarizing.
 
-The above strategy is decent as a starting heuristic; better than "I flopped a pair, so I will bet" or "I will bluff beause I feel like it" strategies. However, it certainly is not optimal. As with most games, knowing what's optimal takes a lot of intuition building, through practice and post mortem with a solver or a better player.
+## Concluding Remarks
 
+The strategy above is a nice starting strategy-- better than "I flopped a pair, so I will bet" or "I will bluff beause I feel like it" strategies. However, it certainly is not optimal. E.g. if your only bluffs on the flop are strong draws (e.g. flush draws), then on turn cards that complete your flush, you suddenly have no bluffs. You have to play the game more to figure out what other hands you should have in your betting ranges, and how your ranges change when your IP vs OOP, when it's a 3bet pot versus a single raised pot, etc.
 
+  </div><a class="u-url" href="/backups/poker-theory-backup" hidden></a>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+</article>
 
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Blogchamp</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Blogchamp</li><li><a class="u-email" href="mailto:thomas.chen@columbia.com">thomas.chen@columbia.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/thomasthechen"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">thomasthechen</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Thomas&#39;s blog for research, shower-thoughts, life reflections, and informal lectures.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
