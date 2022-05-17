@@ -4,7 +4,7 @@ title:  "Poker Theory Principles with an Example"
 date:   2021-06-19 17:27:18 -0700
 categories: jekyll update
 ---
-## Introduction  test test
+## Introduction  test
 
 This article aims to explain the game theory principles in Poker, and to provide intuitive heuristics to applying these principles to improve your game.
 
