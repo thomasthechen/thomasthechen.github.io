@@ -6,6 +6,17 @@ categories: jekyll update
 ---
 ## Introduction $1100
 
+\begin{equation}
+\begin{aligned}
+123 \bra{1}\\
+x_1\\
+x_3
+\end{aligned}
+\end{equation}
+
+
+
+
 This article aims to explain the game theory principles in Poker, and to provide intuitive heuristics to applying these principles to improve your game.
 
 Poker is an imperfect information game as players don't know each others' hole cards. In many ways, this makes poker harder than perfect-information games (where players see the entire game state), such as Tic-tac-toe and chess, because of the ability to bluff. 
