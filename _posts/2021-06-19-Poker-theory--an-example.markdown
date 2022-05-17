@@ -26,7 +26,7 @@ We will illustrate these concepts by providing a principled analysis of the foll
 
 ## A Simplified Poker Game
 
-`Definition 1.1 (Poker River Game):` There are two players, P1 (Alice) and P2 (Bob). To start, there is $100 in the pot and both players have a $100 stack. P1 goes first, choosing either to check (x) or to bet (b) any amount. If P1 checks, P2 can check (x), or bet (b). If P1 bets, P2 can fold (f), call (c), or raise (r). Action alternates in this way, until one player either folds or calls. In the latter case, the player with the better hand wins (showdown).
+`Definition 1.1 (Poker River Game):` There are two players, P1 (Alice) and P2 (Bob). To start, there is 100 in the pot and both players have a 100 stack. P1 goes first, choosing either to check (x) or to bet (b) any amount. If P1 checks, P2 can check (x), or bet (b). If P1 bets, P2 can fold (f), call (c), or raise (r). Action alternates in this way, until one player either folds or calls. In the latter case, the player with the better hand wins (showdown).
 
 First, because of a given player receives limited information about the other player's possible hands, we need the notion of a _range_, to describe the possible hands their opponent could have, along with what probability they estimate their opponent to have it, based on the information they have. 
 
