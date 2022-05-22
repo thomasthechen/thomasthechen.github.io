@@ -6,7 +6,7 @@ categories: jekyll update
 ---
 ## Introduction
 
-This post gives a simple risk assessment of skydiving and other such activities that come with added risk of death. This post is not a recommendation; I am not a doctor. But I think it's useful to think about risk in a principled way.
+This post gives a simple risk assessment of skydiving and other such activities that have added risk of death. This post is not a recommendation; I am not a doctor.
 
 
 Let's start by quantifying risk of death in terms of micromorts, where 1 micromort is equal to $10^{-6}$ probability of death (micro is $10^{-6}$, mort is spanish for death). From wikipedia, below are micromort numbers associated with travel:
@@ -30,25 +30,25 @@ Finally, for perspective here are some miscellaneous risks:
 
 - Ecstasy: 0.5 per tablet
 - All causes: ~20 per day
-- Non-natural causes: 1.6 per day
+- Non-natural causes (all minus natural): 1.6 per day
 
 ## Analysis
 
-The last figure is interesting as it suggests that risk on the order of magnitude of $10^{-6}$ is unavoidable in our every day lives. If we look closer into how these figure are calculated for a particular classification, they just divided the total deaths per day for that classification by the total population. For instance, for all causes, they divided total mortalities per day in the US by the population of the US.
+The last figure is interesting as it suggests that risk on the order of magnitude of $10^{-6}$ is unavoidable in our every day lives. If we look closer into how these figure are calculated for a particular classification, they just divided the total deaths per day for that classification by the total population. For instance, for "all causes", they divided total mortalities per day in the US by the population of the US.
 
 $$2*10^{-5} \approx (2.5 M / 365)/(300M)$$
 
-Thus, these risk numbers are empirical averages of risk of death gathered over hundreds of thousands of samples. To gauge how accurate these averages are, we can consider the variance of these empirical estimates, which we can view as yes-no random variables (Bernoulli).
+These risk numbers are empirical averages of risk of death gathered over a sample of millions. To gauge how accurate these averages are, we can model each person as a random variable that takes values 0 and 1 (Bernoulli) and consider the variance of these estimates.
 
-The variance of a bernoulli random variable with true parameter $$p$$ is $$p(1 - p)$$, and the variance of an empirical estimator $$\hat{p} = \sum_{i = 1}^n \frac{1}{n} X_i$$ is $$Var(\hat{p}) = \frac{p (1 - p)}{n} \leq \frac{p}{n}$$. By making some mild assumptions about $$p$$, such as $$p < 0.01$$, we can compute that the square root of the variance ("standard deviation") is also on the order of $$10^{-6}$$.
+The variance of a bernoulli random variable $$X_i$$ with true parameter $$p$$ is $$p(1 - p)$$, and the variance of an empirical average $$\hat{p} = \sum_{i = 1}^n \frac{1}{n} X_i$$ is $$Var(\hat{p}) = \frac{p (1 - p)}{n} \leq \frac{p}{n}$$. By making some mild assumptions about $$p$$, such as $$p < 0.01$$, we can compute that the square root of the variance ("standard deviation") is also on the order of $$10^{-6}$$.
 
-From these estimates for mean and square root variance, we can construct an upper and lower bound for the true value of these statistics as $$mean + c * std$$ and $$mean - c * std$$, where c is a small constant. 
+From these mean and stdev estimates, we can construct a high-probability upper and lower bound for the true value of these statistics as $$mean + c * std$$ and $$mean - c * std$$, where c is a small constant; With high probability ("confidence"), the true value is between these two bounds.
 
-Using this upper confidence bound analysis, it seems that the "background" risk is on the order of $$10^{-6}$$ with high probability. In contrast, the high probability upper bound for risk of skydiving is
+Using this upper confidence bound analysis, it seems that the background risk is on the order of $$10^{-6}$$ with high probability. In contrast, the high probability upper bound for risk of skydiving is
 
-$$8*10^{-6} + \sqrt{\frac{0.01}{50M}} = 22 * 10^{-6}$$
+$$8*10^{-6} + 2 * \sqrt{\frac{0.01}{50M}} = 36 * 10^{-6}$$
 
-Thus, with high confidence, the risk of skydiving is an order of magnitude higher than the "background" risk we encounter every day. Going on one skydive equals the risk of living 10-20 days.
+Thus, with high confidence, the risk of skydiving is one order of magnitude higher than the "background" risk we encounter every day. Going on one skydive equals the risk of living 10-20 days.
 
 From these numbers, it seems that the average risk of skydiving is relatiely mild. Just going by the averages listed (without any confidence analysis), one skydive is about the same risk as of driving from Seattle to LA and back. 
 
@@ -57,7 +57,9 @@ From these numbers, it seems that the average risk of skydiving is relatiely mil
 
 ## Afterword
 
-I think it's useful to estimate high confidence upper bounds on risk of activites you are considering trying, but ultimately you'd still have to make a judgement call on whether you think the risk you derived is too high for your liking. In my view, the choice of threshold should not be too much higher than the background risk. There's a sentiment on wallstreet that you should never make bets that could lose you your entire portfolio, even if you expect the bet to be positive on average ("never go all in"). I think a similar idea for catastrophic-risk minimization applies here, except that here your minimal risk attained is that which is on the order of magnitude of the background risk.
+I think it's useful to estimate high confidence upper bounds on risk of unfamiliar (and inherently risky) activities. However, ultimately you'd still have to decide whether that risk is tolerable, and it's not clear what that threshold should be, if we even are supposed to have a strict threshold to govern our decision-making. 
+
+But probably, your estimated risk of so-and-so activity should not be too much higher than the background risk. There's a sentiment on wallstreet to never go all in, as it's best to minimize risk where the downside is infinite.
 
 <!---
 

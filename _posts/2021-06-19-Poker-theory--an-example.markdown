@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Poker Theory Principles"
+title:  "Game Theory of Poker"
 date:   2021-06-19 17:27:18 -0700
 categories: jekyll update
 ---
@@ -217,14 +217,14 @@ When constructing your betting ranges in no limit holdem, you should have a targ
 
 When you have 10-20 seconds for each decision, it's important to have a structured decision making process that takes into account the most important information of the hand. 
 
-Offline preparation:
+Before you play, prepare the following offline:
 
-1. Choose two bet sizes: one "small" bet size (e.g. 1/3 pot) and one "large" bet size (e.g. 2/3 pot). Your in-game decisionmaking will just be to decide whether you should check, bet small, or bet large.
+1. Choose two bet sizes: one "small" bet size (e.g. 1/3 pot) and one "large" bet size (e.g. 2/3 pot). Your in-game decisionmaking will just be to decide whether you should check, bet small, or bet large. Note that on the river, you can also use the "all-in" sizing, which should be used only if you heavily polarize your betting range (i.e. you have a large nut advantage).
 
 2. Memorize some preflop charts for single raised pots and 3bet pots. This is like knowing your chess openings--you don't want to have to deduce these in real time.
 
 
-In the moment, ask yourself the following questions:
+In the moment, ask yourself the following:
 
 1. (Info Recap) Recap the important information. What actions you took, what actions they took, what cards came down, what position you are in (IP or OOP).
 
@@ -234,12 +234,12 @@ In the moment, ask yourself the following questions:
 
 4. (Exploitative Considerations) Now consider any exploitative tells or tendencies you gleam from your opponent. If you think your reads are strong enough, consider deviating from the GTO baseline strategy (i.e. step 3) to exploit your opponent. There are a lot of good exploitative tells: 
 
-- Exploitable Strategies: If they always cbet flop with their good hands, but on this flop they check, then this signals extreme weakness
-- Bet timing: When you have a nutted hand, you often have to think about whether betting or checking will be more profitable. Thus, if they bet quickly in a spot they should be thinking hard about, they're probably bluffing
-- Bet sizing: Do they use different sizings when value-betting versus bluffing? Some people size down when the value bet since they want to get called and size up when they want a fold. In another context, some people will bet full pot on the river when they have a strong hand they feel has not been adequately paid off; however, they would never airball bluff river with such a large sizing
-- Intentional/Reverse Tells: This usually happens in big hands; if they are acting weak in a hand they're heavily invested in, this signals strength. If they're acting strong (aggressively slamming down chips, staring you down), this signals weakness. Of course, the difficult part is judging whether they're acting or being genuine.
-- Table talk and interaction: A poker legend once said that if you smile at a player and they give you a genuine smile back, they're likely not bluffing. I think this points to a larger observation that people are more relaxed when they actually have the goods, and you can try gauge this through how they talk and act in front of you.
-- Early signs of disinterest: Usually if a player is on their phone at the beginning of a hand, they don't have anything good
+    - Exploitable Strategies: If they always cbet flop with their good hands, but on this flop they check, then this signals extreme weakness
+    - Bet timing: When you have a nutted hand, you often have to think about whether betting or checking will be more profitable. Thus, if they bet quickly in a spot they should be thinking hard about, they're probably bluffing
+    - Bet sizing: Do they use different sizings when value-betting versus bluffing? Some people size down when the value bet since they want to get called and size up when they want a fold. In another context, some people will bet full pot on the river when they have a strong hand they feel has not been adequately paid off; however, they would never airball bluff river with such a large sizing
+    - Intentional/Reverse Tells: This usually happens in big hands; if they are acting weak in a hand they're heavily invested in, this signals strength. If they're acting strong (aggressively slamming down chips, staring you down), this signals weakness. Of course, the difficult part is judging whether they're acting or being genuine.
+    - Table talk and interaction: A poker legend once said that if you smile at a player and they give you a genuine smile back, they're likely not bluffing. I think this points to a larger observation that people are more relaxed when they actually have the goods, and you can try gauge this through how they talk and act in front of you.
+    - Early signs of disinterest: Usually if a player is on their phone at the beginning of a hand, they don't have anything good
 
 ## A Simple but Solid Strategy
 
