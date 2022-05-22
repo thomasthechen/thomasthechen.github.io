@@ -51,7 +51,7 @@ Equity -- A player's equity is their chance of winning the hand by making the be
 
 EV -- An action or strategy's EV is how much money you make in expectation by playing it.
 
-Nutted hand -- a hand whose strength is among the strongest possible
+Nutted hand -- a hand whose strength is among the strongest possible (say, top 10%)
 
 We now present a simplified poker game that we can analyze by hand.
 
@@ -135,12 +135,14 @@ Thus, at equilibrium, P1 bets 100% of AA and 50% of QQ, and checks 50% of QQ. P2
 
 We'll start by elaborating on the key concepts highlighted.
 
-**Key Concept 3** If you play a NE strategy, the best your opponent can do against you is by playing a NE themself. In a heads up setting, if both players play a NE, then they both earn an EV of 0, and either player will only lose EV if they deviate from their NE strategy. This is what Game theory optimal (GTO) maximalists mean when they say that playing GTO cannot lose in expectation. 
+**Key Concept 3** 
+
+If you play a NE strategy, the best your opponent can do against you is by playing a NE themself. In a heads up setting, if both players play a NE, then they both earn an EV of 0, and either player will only lose EV if they deviate from their NE strategy. This is what Game theory optimal (GTO) maximalists mean when they say that playing GTO cannot lose in expectation. 
 
 However, to evaluate the utility of playing a NE strategy in practice, let's return to the assumptions we made. In particular, if you and I are playing a lot of hands together (10,000+), the following two assumptions become true.
 
 1. (Realizability) If my strategy has an edge on yours, I am able to realize that edge, by the law of large numbers.
-2. (Approximate Perfect Knowledge) Because we play so many hands, we can gauge approximately what the other person's strategy is at each spot: how often are they betting, with what sizing, and with what hands?. This means that if you are playing a highly exploitable strategy, after 10,000 hands your oppoonent will catch on, adjust, and exploit your strategy.
+2. (Approximate Knowledge) Because we play so many hands, we can gauge approximately what the other person's strategy is at each spot: how often are they betting, with what sizing, and with what hands?. This means that if you are playing a highly exploitable strategy, after 10,000 hands your oppoonent will catch on, adjust, and exploit your strategy.
 
 Note that these two assumptions--that EV is all that matters and that we have perfect knowledge of the opponent's (mixed) strategy-- are assumptions we make in the game theoretic analysis above. Thus, in circumstances where we play a large number of hands against our opponent, it is important to play a sound game-theoretic strategy. In the 25,000 hand heads up challenge between Doug Polk and Daniel Negreanu, the reason Polk was over a 4:1 favorite was because he played a sounder GTO strategy.
 
@@ -149,7 +151,9 @@ However, in most poker settings these assumptions don't apply. If you walk into 
 Still, learning GTO is crucial in being able to play stronger players and longer sessions. Having solid GTO fundementals can only help you as you play stronger players who have fewer exploitable tendencies and who also know how to exploit you back.
 
 
-**Key Concept 1** When your range is _polarized_, your strongest hands are stronger than your opponent's hands, and your weakest hands are weaker than your opponent's hand. In our toy game, Player 1 had a perfectly polarized range while Player 2, conversely, had a condensed range.
+**Key Concept 1** 
+
+When your range is _polarized_, your strongest hands are stronger than your opponent's hands, and your weakest hands are weaker than your opponent's hand. In our toy game, Player 1 had a perfectly polarized range while Player 2, conversely, had a condensed range.
 
 We saw from claim 1.3 that it was highly suboptimal for Player 2 to bet into player 1. When Player 1 is polarized and facing a bet, she can always just fold her bad hands and call with her good hands. Against this simple counter strategy, P2's bet achieves nothing positive. 
 
@@ -170,7 +174,7 @@ Regarding heuristic 1, we saw that in the toy game that a player at a severe nut
 
 Assuming we can bet, we now need to decide betting frequency. Regarding heuristic 2, the larger your equity advantage, the more frequently you can bet. This is why in single raised pots, on a board like Ad Qh 3s, the preflop aggressor is betting close to 100% of range ("range betting"), often for a small size. 
 
-Conversely, if you are at equity disadvantage, you should check more frequently, even if you have the nut advantage. For instance, often on the turn (e.g. A-T-2-3), the player who bet the flop will have a nut advantage but an equity disadvantage, and will bet at a low frequency for a large sizing. This betting  pattern is called "turn polarization", where on the turn you only bet your very strongest hands along with some bluffs, for a very large sizing.
+Conversely, if you are at equity disadvantage, you should check more frequently, even if you have the nut advantage. For instance, suppose the preflop raiser cbets all their hands on a flop of A-T-2, and the opponent calls. The turn card is a 3 (board is A-T-2-3), and in this situation the flop bettor still has the nut advantage (having Aces, Tens, AT in range), but is actually at an equity disadvantage. This is because the flop caller will be very dense in top pairs and second pairs after calling the flop bet, while the preflop bettor still has a ton of garbage in range (e.g. Queen high). In this situation, if the preflop bettor bets, they will usually bet at a low frequency (say, 40% of the time) for a large sizing. When they bet, they will only bet with their very strongest hands, along with some bluffs (and will choose a large sizing like 2/3 pot). This betting pattern is called "turn polarization". With the remaining hands in their range (the weaker, middling hands), they just check.
 
 Now let's address how large you should bet.
 
@@ -190,20 +194,22 @@ Here are some common examples of bet frequency and sizing:
 
 Finally, let me address how position should affect your bet sizing and frequency. Being in position is an advantage for three reasons
 
-1. You see what your opponent does before you act, giving you an information edge
+1. You see what your opponent does before you act, giving you more information about their true range before you act
 
-2. If your opponent checks, you have the option to check back and see the next card. That is, you have the option to realize your equity for free. In contrast, if you are OOP and you check, there is no guarantee that you get to see the next card for free, if your opponent bets.
+2. If your opponent checks, you have the option to check back and see the next card. That is, you have the option to realize your equity for free. In contrast, if you are OOP and you check, there is no guarantee that you get to see the next card for free, in the event your opponent bets.
 
-3. If you bet when OOP get raised, you will be playing a large pot from OOP on future streets. That is, IP can apply a lot more pressure through raises.
+3. If you bet from OOP and you get raised, you will be playing a large pot from OOP on future streets. This is usually an uncomfortable spot. Put another way, IP can apply a lot of pressure through raises.
 
 Because of these points (especially points 2 and 3), you need to play more defensively when OOP. This means that you should generally decrease your betting frequency (so don't bet with a lot of your marginal hands). Despite being OOP, you usually still have many nutted hands in range. Thus, it is common that OOP strategies will include betting larger and less frequently than if you were in the same spot, but IP.
 
-In addition to betting less frequently (i.e. checking your marginal hands), you also need to check more traps (really strong hands) than if you were IP. This is because if you always bet all your strong hands, then when you check, your opponent will attack your weakened range. This would be less of a problem if your IP because when you check as IP, you immediately see the next card. But being OOP, you need to check some traps to protect the weak hands that you also check.
+In addition to betting less frequently (i.e. checking your marginal hands), you also need to check more traps (nutted hands that you intentionally check) than if you were IP. This is because if you always bet all your strong hands, then when you check, your opponent will attack your weakened checking range. This would be less of a problem if your IP because when you check as IP, you immediately see the next card. But being OOP, you need to check some traps to protect the weak hands in your checking range against your opponent's bets.
 
 
-**Key Concept 2** Indifference is an important concept to note when constructing your strategies. In our toy game, player 1 made player 2 indifferent to her options of calling and folding, by mixing in the correct number of bluffs in her betting range. It was at the precise point where player 2 was indifferent that player 1 earned max EV. If player 1 overbluffed, calling became preferred. If player 1 underbluffed, folding became preferred. 
+**Key Concept 2** 
 
-When constructing your betting ranges in no limit holdem, you should have a target set of hands in mind that you want to make indifferent __or colloquially, to put in a tough spot__. It is in this exact scenario that they lose most EV theoretically, and moreover that in practice they make the most mistakes (minus EV decisions). When betting, think of the type of hand you want to target: the middling-type hand they will make a lot of mistakes with, facing your bet, and either over fold or overcall.
+Indifference is an important concept to note when constructing your strategies. In our toy game, player 1 made player 2 indifferent to his options of calling and folding by mixing in the correct number of bluffs in her betting range ("balancing her bluffs"). It was at the precise point where player 2 was indifferent that player 1 earned max EV. If player 1 overbluffed, calling became preferred. If player 1 underbluffed, folding became preferred. 
+
+When constructing your betting ranges in no limit holdem, you should have a target set of hands in mind that you want to make indifferent or colloquially, to put in a tough spot. In theory, doing so denies maximal equity from these hands. In practice, doing so induces a ton of mistakes out of your opponent, as players make more mistakes when put in murky, 50-50 spots than in spots with an obvious correct play. When betting, have in mind the type of hand you want to target: top pairs/middle pairs, flushes, Ace highs, etc. This type should usually be a sizable portion of their range--don't make an obscenely large bet, hoping to target the top 1% of their range.
 
 
 
@@ -213,7 +219,7 @@ When you have 10-20 seconds for each decision, it's important to have a structur
 
 Offline preparation:
 
-1. Choose two bet sizes: one "small" bet size (e.g. 1/3 pot) and one "large" bet size (e.g. 2/3 pot). Your subsequent decisionmaking will just be to decide whether you should check, bet small, or bet large.
+1. Choose two bet sizes: one "small" bet size (e.g. 1/3 pot) and one "large" bet size (e.g. 2/3 pot). Your in-game decisionmaking will just be to decide whether you should check, bet small, or bet large.
 
 2. Memorize some preflop charts for single raised pots and 3bet pots. This is like knowing your chess openings--you don't want to have to deduce these in real time.
 
@@ -224,15 +230,15 @@ In the moment, ask yourself the following questions:
 
 2. (Range Strategy) Roughly estimate your range and their range and ask yourself what your range wants to do in this spot. E.g. do I want to bet frequently and small, bet infrequently but large, etc. 
 
-3. (Hand Strategy) Ask yourself what your particular hand wants to do. If I have a nutted hand or a strong draw, I want to bet large to polarize. If I have a middling hand, I want check to get to showdown for cheap, for fear of betting and getting raised. Before you bet, always consider what will happen if your opponent puts in a raise: can my middling draw or middling showdown-value hand withstand a check-raise? If not, I should consider checking more. In this way, you can determine your hand's strategy in the context of your range's strategy.
+3. (Hand Strategy) Assuming your range wants to bet, ask yourself whether your particular hand wants to bet. If you have a nutted hand or a strong draw, you want to bet to polarize. If you have a middling hand, you want check to get to showdown for cheap. If you expect your opponent to raise a lot of the time, consider whether your hand can withstand a raise. If not, you should consider checking that hand. In this way, you can determine your hand's strategy in the context of your range's strategy.
 
-4. (Exploitative Considerations) Now consider any exploitative tells or tendencies you gleam from your opponent. If you think your reads are strong enough, consider deviating from your GTO baseline to exploit your opponent. There are a lot of good exploitative tells: 
+4. (Exploitative Considerations) Now consider any exploitative tells or tendencies you gleam from your opponent. If you think your reads are strong enough, consider deviating from the GTO baseline strategy (i.e. step 3) to exploit your opponent. There are a lot of good exploitative tells: 
 
 - Exploitable Strategies: If they always cbet flop with their good hands, but on this flop they check, then this signals extreme weakness
 - Bet timing: When you have a nutted hand, you often have to think about whether betting or checking will be more profitable. Thus, if they bet quickly in a spot they should be thinking hard about, they're probably bluffing
-- Bet sizing: Do they use different sizings when value-betting versus bluffing? Some people size down when the value bet since they want to get called and size up because they want a fold. In another context, some people will bet full pot on the river when they have a strong hand they feel has not been adequately paid off; however, they would never airball bluff river with such a large sizing
-- Intentional/Reverse Tells: This usually happens in big hands, but if they are acting weak in a hand they're heavily invested in, this signals strength. Vice versa if they're acting strong
-- Table talk and interaction: A poker legend once said that if you smile at a player and they give you a genuine smile back, they're likely not bluffing
+- Bet sizing: Do they use different sizings when value-betting versus bluffing? Some people size down when the value bet since they want to get called and size up when they want a fold. In another context, some people will bet full pot on the river when they have a strong hand they feel has not been adequately paid off; however, they would never airball bluff river with such a large sizing
+- Intentional/Reverse Tells: This usually happens in big hands; if they are acting weak in a hand they're heavily invested in, this signals strength. If they're acting strong (aggressively slamming down chips, staring you down), this signals weakness. Of course, the difficult part is judging whether they're acting or being genuine.
+- Table talk and interaction: A poker legend once said that if you smile at a player and they give you a genuine smile back, they're likely not bluffing. I think this points to a larger observation that people are more relaxed when they actually have the goods, and you can try gauge this through how they talk and act in front of you.
 - Early signs of disinterest: Usually if a player is on their phone at the beginning of a hand, they don't have anything good
 
 ## A Simple but Solid Strategy
