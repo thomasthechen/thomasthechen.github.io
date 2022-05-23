@@ -63,15 +63,15 @@ Now, we'll sketch the proof of the Cook-Levin Theorem, following ch 6 of Arora's
 
 `Claim 1:` For any polynomial time turing machine M, we can create a family of polynomial sized circuits that is equivalent to M (i.e. they compute the same function).
 
-_Proof:_ Omitting technical definitions, this essentially follows from the fact that $$P \subset P/poly$$. The takeaway of this claim is that our verifier, M, can be expressed as a set of circuits. In particular, if we fix the input size of M, then we can express M as one circuit C. If you've taken systems, this claim is pretty intuitive as any computational machine is comprised of a circuit of AND, OR, and NOT gates. $$\square$$
+_Proof:_ Omitting technical definitions, this essentially follows from the fact that $$P \subset P/poly$$. The takeaway of this claim is that our verifier, M, can be expressed as a set of circuits. In particular, if we fix the input size of M, then we can express M as one circuit C. If you've taken systems, this claim is pretty intuitive as any computational machine is comprised of a circuit of AND, OR, and NOT gates. $$\blacksquare$$
 
 Define the language CKT-SAT to have all boolean circuits (outputting 0 or 1) that have a satisfying assignment: a circuit C is satisfiable if there exists a $$u \in \{ 0, 1\}^n$$ such that C(u) = 1. 
 
 `Claim 2:` CKT-SAT is NP-hard.
 
-_Proof:_ For $$L \in NP$$, let M be its verifier, and for any instance $$x \in L$$, encode M(x, \cdot) as a circuit C(\cdot) such that $$M(x, u) = C(u), \forall u$$. Then, if there is a solution u to x, then $$M(x, u) = 1 = C(u)$$. That is, u satisfies C. Similarly, if there is no such solution u, then C is unsatisfiable.
+_Proof:_ For $$L \in NP$$, let M be its verifier, and for any instance $$x \in L$$, encode $$M(x, \cdot)$$ as a circuit $$C(\cdot)$$ such that $$M(x, u) = C(u), \forall u$$. Then, if there is a solution u to x, then $$M(x, u) = 1 = C(u)$$. That is, u satisfies C. Similarly, if there is no such solution u, then C is unsatisfiable.
 
-Thus, $$x \in L \iff C \in CKT-SAT$$. This means that if we want to decide if a problem instance x is in an NP language L, we can instead decide whether a particular circuit C is in CKT-SAT, solving the latter as a "proxy," of sorts. Thus, if we have the power to decide CKT-SAT, by extension we are able to decide any language in NP. That is, deciding whether a circuit $$C \in CKT-SAT$$ is at least as hard as deciding any language in NP. $$\square $$
+Thus, $$x \in L \iff C \in CKT-SAT$$. This means that if we want to decide if a problem instance x is in an NP language L, we can instead decide whether a particular circuit C is in CKT-SAT, solving the latter as a "proxy," of sorts. Thus, if we have the power to decide CKT-SAT, by extension we are able to decide any language in NP. That is, deciding whether a circuit $$C \in CKT-SAT$$ is at least as hard as deciding any language in NP. $$\blacksquare $$
 
 So far, we've "encoded" NP computations into deciding whether a particular circuit is satisfiable, an NP-hard problem. This circuit will only output 1 for certain inputs but not others, and this can be thought of as the circuit imposing a set of constraints on the input. Only inputs that satisfy the constraints will cause the circuit to output 1. Inputs that don't satisfy the constraints will cause the circuit to output 0. The set of constraints induced by the circuit form a constraint satisfaction problem (CSP). 3-SAT is a type of CSP, where each constraint is a "clause" like we discussed before. What's interesting is that despite 3-SAT's constraints taking a relatively simple form, they are sufficient for encoding general constraints imposed by a circuit. In particular,
 
@@ -85,7 +85,7 @@ This can be written in 3-CNF form as
 
 $$(\neg z_i \vee \neg z_j \vee z_k) \wedge (\neg z_i \vee z_j \vee \neg z_k) \wedge (\neg z_i \vee z_j \vee z_k) \wedge (z_i \vee \neg z_j \vee \neg z_k)$$
 
-We can encode OR, NOT gates similarly. Finally, if $$v_i$$ is the output node of C, then we add the clause $$(z_i)$$ to $$\phi$$. Then, $$\phi$$ is satisfiable iff C is satisfiable. This construction implies that being able to decide whether 3-CNF formulas are satisfiable is at least as hard as deciding circuit satisfiability. Thus, 3-SAT is NP-hard. $$\square$$
+We can encode OR, NOT gates similarly. Finally, if $$v_i$$ is the output node of C, then we add the clause $$(z_i)$$ to $$\phi$$. Then, $$\phi$$ is satisfiable iff C is satisfiable. This construction implies that being able to decide whether 3-CNF formulas are satisfiable is at least as hard as deciding circuit satisfiability. Thus, 3-SAT is NP-hard. $$\blacksquare$$
 
 The arguments here "encodes" each computation in NP first as a circuit, then as a set of 3-SAT constraints. The fact that we can always encode in this way is the reason for hardness. 
 
@@ -96,9 +96,9 @@ This is why 3-SAT can encode NP-computations while 2-SAT cannot. Indeed, if we c
 
 _remark_: What we showed above is not the canonical proof for the Cook-Levin Theorem, but the canonical proof illustrates the same ideas, though it takes longer to explain. On a high level, that proof encodes the tableaux of the verifier M as a 3-CNF formula. The tableaux is the "history of computation" of M, which tracks the configurations/states it was in at each timestep until it finished its computation. Intuitively, a CSP can be created to be satisfied given a valid tableaux, that was generated by a Turing machine. Because turing machines operate on a small number of inputs, these constraints are highly local and therefore encodable in a small number of variables each. In short, the nature of a Turing machine is that it only acts on a small number of bits at a time, enabling us to create a 3-CNF formula encoding whether it outputted 1 (i.e. verified a solution to an instance x in L).
 
-## Reflection
+## Concluding Remarks
 
-In wondering why 2-SAT does not capture the complexity of NP while 3-SAT does, we've provided a rough answer: circuits (or other models of computation) can only be described by constraints of size at least 3. These are exemplified by AND and OR gates, which at minimum have 2 inputs and one output. I guess the natural question now is: how is it that any circuit computing any function can be expressed as a combination of AND, OR, and NOT gates? (And this is true not just for classical computers, but also for quantum computers--see Solovay-Kitaev theorem). For this, I don't have any technicals to present. But it is really interesting that arbitrary, complex computations are comprised of these small, simple components that do simple logical operations. Each component follows simple rules, but the combination of them makes the complexity of the whole very large--like that scene out of 三体.
+In wondering why 2-SAT does not capture the complexity of NP while 3-SAT does, we've provided a rough answer: circuits (or other models of computation) can only be described by constraints of size at least 3. These are exemplified by AND and OR gates, which at minimum have 2 inputs and one output. I guess the natural follow up is: how is it that any circuit computing any function can be expressed as a combination of AND, OR, and NOT gates? (and beyond classical computing, an analogous result also holds for quantum computing--see the Solovay-Kitaev Theorem). For this, I don't have any technicals to present. But it is really interesting that arbitrary, complex computations are comprised of these small components that do simple logical operations. Each component follows simple rules, but the combination of them makes the complexity of the whole very large--like that scene out of 三体.
 
 <!--
 
