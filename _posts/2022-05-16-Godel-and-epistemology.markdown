@@ -10,7 +10,7 @@ In the 20th century there was a push to axiomitize math by looking for a set of 
 
 These results are interesting both technically and philosophicallly. From a technical perspective, the result has fascinating connections with computability theory; also, the proof itself uses neat ideas like Chinese Remainder Theorem to encode sequences into integers. Philosophically, people have argued over the interpretation of Godel's theorems since their inception. One canonical interpretation is that Incompleteness shows that the brain is capable of more than a computer (Turing machine). Roger Penrose, the famous mathematical physicist, wrote a book, The Emperor's New Mind, on this argument. Besides cognition and AI, there are also discussions about epistemology ("how do we know things") and the foundations of math.
 
-There's a lot to dig into here, and I hope to cover technical and philosophical sides of the result in this post. The technicals will be based on Steve Cook and Toni Pitassi's lecture notes very closely, while the philosophical side will be based on whatever I find on the internet.
+There's a lot to dig into here, and I hope to cover technical and philosophical sides of the result in this post. The technicals will be based on Steve Cook and Toni Pitassi's lecture notes very closely, while the philosophical side will be based on whatever I find on the internet. This post will be more technical in nature (apologies), but I'll do my best to distill the main ideas down. There's a purely philosophical section towards the end after all the technical details.
 
 ## The First Incompleteness Result
 
@@ -206,20 +206,80 @@ Note that since G is "I am not provable in PA", then the statement "If PA were c
 
 ## Philosophy
 
-As if this all wasn't mind-bending enough, now we'll get into higher level, philosophical interpretations of Godel's theorems. I actually haven't read these in too much depth, so I'll just outline most basic arguments, drawing ideas from Roger Penrose, Scott Aaronson, Alan Turing, and the depths of the credible internet. I'll also weave in some of my own thoughts and questions.
-
-# Limits of AI?
-
-
+We'll now get into higher level, philosophical interpretations of Godel's theorems. I actually haven't read these in too much depth, so I'll just outline most basic arguments, drawing ideas from Roger Penrose, Scott Aaronson, Alan Turing, and the depths of the credible internet. I'll also weave in some of my own thoughts and questions.
 
 # Foundations of Math
 
+Maybe the most direct philosophical implication of Incompleteness is that it poses serious obstacles to those who are trying to completely axiomitize mathematics ("Hilbert's Program"). Suppose we all agree on some sufficiently complex vocabulary $$(L_A)$$ and some interpretation for the symbols in that vocabulary (e.g. the standard interpretation, $$\mathbb{N}$$). Then we can't sum up all true statements in a small (i.e. TM recursive) number of axioms.
+
+There's debate on whether Incompleteness has concrete implications for different philosophies of mathematics, such as Logicism and Intuitionism. We'll briefly define Logicism
+
+Logicism -- All the objects forming the subject matter of those branches of math are logical objects; Further, Logic is capable of generating a mathematician’s ‘first principles’: the basic definitions of a branch of math. All of math reduces to logic. [3]
+
+Logicism makes very strong claims about the power of Logic, with a flavor that's reminiscent of Plato. Plato claimed that there were abstract "forms" from which all truths were derived. They served as "first principles" to justice (the topic he was addressing). He viewed the ability to acquire knowledge of these "first principles" and to deduce truth from them as the ultimate cognitive capability, (and claimed this was something only a philosopher has, who therefore, ought to be king).
+
+Logic within a formal proof system, at least, seems to fall short of this platonic ideal. There isn't a set of "forms" or axioms for all of TA, much less all truths for justice and human behavior. Incompleteness seems like a strong barrier to Logicism. Godel, apparently, argued against logicism using Incompleteness [2].
+
+
+# Limits of AI?
+
+The argument against Logicism in the previous section cited the limitation of formal logic. This begs the question: can our reasoning capabilities be described as deducing theorems in a formal system? Indeed, does Incompleteness say anything definitive about the power of human cognition--are we fundementally smarter than a computer? The latter is a loaded question, with high caliber mathematicians arguing either side.
+
+Regarding the positive (anti-mechanism) argument, J.R. Lucas proclaimed that: 
+
+"given any machine which is consistent and capable of doing simple arithmetic, there is a formula it is incapable of producing as being true … but which we can see to be true."
+
+This refers to the first of Godel's theorems--for a given formal system F, like PA, the sentence G(F): "I cannot be proved in F". 
+
+Neither of these statements can be proved by the formal system (the machine), and yet we as humans can "see" their truthfulness via some "meta" reasoning. This, perhaps, means we are far smarter than any such machine. What do you think of this argument?
+
+This is the view of Roger Penrose. Penrose, in fact, believes in a much stronger statement: the brain is not just super-Turing, it uses so-far undiscovered laws of quantum-gravity to do information processing that classical computers can't. And that all this happens in the microtubules of our cells [4]. This is his central claim in his famous book, The Emperor's New Mind.
+
+However, this "anti-mechanism" argument is generally viewed as problematic. The standard rebuttal is that they mistake the first Incompleteness theorem as saying "G(F) has no proof in PA". In fact, the first Incompleteness theorem says that "Assuming PA is consistent, G(F) has no proof in PA". Thus, if a human really can "see" the truth of G(F) at a glance, finding a proof for it that a machine couldn't, then surely they must be able to "see" that PA is consistent.
+
+Maybe we can test this supposition. Here are the axioms to Peano Arithmetic, PA. Can you "see" that these form a consistent theory--that there will be no theorem along the way that is proved both true and false by PA? 
+
+<center><img src="/images/pa.png" alt="drawing" width="500"/></center>
+
+Even assuming someone perceived PA's consistency, how would you even verify that what they did was fundementally different from what a machine could do? 
+
+An anti-mechanist would retort: "The machine is just shuffling symbols around--I, on the other hand, actually felt that PA is consistent". 
+
+To which the age-old rebuttal applies: "how do you know the machine didn't feel that PA is consistent, too?"
+
+Thus, the Incompleteness anti-mechanism argument is really just the same age-old anti-mechanism argument that machines can't "feel" as we humans do. Ultimately, it is unsatisfying because there's no way to tell if someone actually ascertains the truth of PA, or if they are just assuming its consistency a priori. If the latter is the case, then if we gave a machine the same freedom to assume consistency of PA, it would also be able to prove G(F). Turing and Aaronson both subscribe to this view.
+
+In short, it's extremely tenuous to try use Incompleteness to claim that the human mind is super-Turing, or that AI is fundementally limited. Interestingly, apprently Godel subscribed to a version of the anti-mechanist view, though a softer, more cautious view than the one presented above [2].
+
 # Epistemology
 
+From the rebuttal of the anti-mechanism argument, it seems we can't take for granted that 
+
+1) we as humans can "see" truths machines can't
+
+2) machines are necessarily confined to a formal system
+
+A question that lingers in my mind is: what is an accurate characterization of our ability to reason? We've been able to reason logically for all of history, without the development of formal mathematics or logic. We can talk about a "proof by contradiction" without the need for a notion of a "contrapositive". We can talk about "definitions" and "induction" without the need for formal axioms. We (by we, I mean Godel) proved things about logical proof systems and logic using our own logical facilities. 
+
+Are we just mechanistic proving machines, working in a stronger formal system? Or do we truly possess some super-Turing capability to gaze into the Platonic heavens?
+
+Another question is around our perception of truth and false. Labeling things as true and false is the intuitive way we make sense of the world. Yet, if you examine that, maybe it will begin to seem a little arbitrary as well. Could we reason in a way so as to assign statements a continuous value, instead of 0/1? Maybe like a "degree of truth." One reply I've received to this question is that although we can develop proof systems where statements take on values besides 0 and 1, it's just simplest to have a true/false "value assignment". And simple is better! I find this mostly believable, but part of me still wonders if the way we perceive things as true/false is fundementally arbitrary. I hope what I'm asking is actually a good question. 
+
+## Conclusion
+
+As a concluding remark to this post, I just wanted to point out how intricately connected CS is to logic. In my opinion, Incompleteness is among the most elegant mathematical results, and it will take your thoughts to weird and interesting places, even beyond the math itself. To this point, Scott Aaronson once said that CS ought to be renamed "Quantitative Epistemology," a suggestion I find kind of endearing. 
 
 ## References
 
 [1] https://www.cs.columbia.edu/~toni/Courses/Logic2021/Notes/Incompleteness.pdf
 
 [2] https://plato.stanford.edu/entries/goedel-incompleteness/#Mat
+
+[3] https://plato.stanford.edu/entries/logicism/
+
+[4] Quantum Computing since Democritus -- https://www.scottaaronson.com/democritus/
+
+
+
+
 

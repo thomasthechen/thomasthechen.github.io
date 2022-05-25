@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Skydiving and Risk"
+title:  "Skydiving Risk Assessment"
 date:   2022-04-20 17:27:18 -0700
 categories: jekyll update
 ---

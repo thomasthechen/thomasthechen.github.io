@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Complexity and the Discontinuity Between 2 and 3"
+title:  "The Discontinuity Between 2 and 3"
 date:   2022-05-17 17:27:18 -0700
 categories: jekyll update
 ---
