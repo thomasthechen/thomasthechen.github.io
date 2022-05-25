@@ -30,7 +30,7 @@ There seem to many other such phenomena in Complexity: in game theory, we can st
 
 So what? Of course adding more players increases the complexity of finding a NE! But here's the kicker: every n-player game is in a sense "equivalent" to a 3-player game, in that there is a polynomial time transformation that recovers a NE of any n-player game from that of some 3-player game (i.e. $$n-Nash \leq 3-Nash$$, Bubelis, 1979).
 
-So there is a gap in complexity between 2-Nash and 3-Nash, but after 3-Nash, the complexity saturates as the number of players increases. The only discontinuity in complexity is in the jump from 2 and 3 players. That's really interesting since it's the same phenomena we saw with 2-SAT/3-SAT. 
+So there is a gap in complexity between 2-Nash and 3-Nash, but after 3-Nash, the complexity saturates as the number of players increases. The only discontinuity in complexity is in the jump from 2 and 3 players. That's really interesting, and it's the same phenomena we saw with 2-SAT/3-SAT. 
 
 What's special about 2 and 3?
 
@@ -42,7 +42,7 @@ _Three body problem_ - When we have isolated two bodies interacting through grav
 
 _Random Walks in 3 dimensions_  - Suppose that we have a particle at the origin of a 3D grid. At each time step, the particle will move one unit left, or one unit right with equal probability, 1/2. This is called a random walk in 1 dimension. It turns out that in 1 dimension, the particle will return to the origin infinitely often. So if I start the random walk then go play a game of league, when I come back, I know that I will be able to see the particle return to the origin after waiting some finite amount of time. 
 
-Suppose that the particle now does a 2D random walk: at each time step, it goes left, right, forward, or backwards with equal probability 1/4. As with the 1D case, the particle still returns to the origin infinitely often. However, when the particle does a 3D random walk, moving either left, right, forward, backwards, up, or down with equal probability, then it no longer returns to the origin infinitely often. Somehow, as soon as we hit 3 dimensions, there is a tendency for the particle to stray away from the origin and never come back.
+Suppose that the particle now does a 2D random walk: at each time step, it goes left, right, forward, or backwards with equal probability 1/4. As with the 1D case, the particle still returns to the origin infinitely often. However, when the particle does a 3D random walk, moving either left, right, forward, backwards, up, or down with equal probability, then it no longer returns to the origin infinitely often. Somehow, as soon as we move to 3 dimensions, there is a tendency for the particle to stray away ("diffuse") from the origin and never come back.
 
 _Fermat's Last Theorem_ - We can find integers $$a,b,c$$ such that $$a^2 + b^2 = c^2$$, e.g. $$a = 3, b = 4, c = 5$$. But for any integer power $$n \geq 3$$, there is no integer solution to $$a^n+ b^n = c^n$$. 
 
