@@ -55,7 +55,7 @@ From these numbers, it seems that the average risk of skydiving is relatiely mil
 
 
 
-## Afterword
+## Concluding Remarks
 
 I think it's useful to estimate high confidence upper bounds on risk of unfamiliar (and inherently risky) activities. However, ultimately you'd still have to decide whether that risk is tolerable, and it's not clear what that threshold should be, if we even are supposed to have a strict threshold to govern our decision-making. 
 

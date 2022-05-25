@@ -4,6 +4,9 @@ title:  "Game Theory of Poker"
 date:   2021-06-19 17:27:18 -0700
 categories: jekyll update
 ---
+
+Thanks to Collin and Bennett for editing this post
+
 ## Introduction
 
 This article aims to explain game theory principles in Poker and provide intuitive heuristics to apply in your game.
