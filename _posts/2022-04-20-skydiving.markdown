@@ -48,18 +48,18 @@ Using this upper confidence bound analysis, it seems that the background risk is
 
 $$8*10^{-6} + 2 * \sqrt{\frac{0.01}{50M}} = 36 * 10^{-6}$$
 
-Thus, with high confidence, the risk of skydiving is one order of magnitude higher than the "background" risk we encounter every day. Going on one skydive equals the risk of living 10-20 days.
+Thus, with high confidence, the risk of skydiving is one order of magnitude higher than the "background" risk we encounter every day. Going on one skydive equals the risk of living 10-30 days.
 
-From these numbers, it seems that the average risk of skydiving is relatiely mild. Just going by the averages listed (without any confidence analysis), one skydive is about the same risk as of driving from Seattle to LA and back. 
+From these numbers, it seems that the average risk of skydiving is fairly mild. Just going by the averages listed (without any confidence analysis), one skydive is about the same risk as of driving from Seattle to LA and back. 
 
 
 
 
 ## Concluding Remarks
 
-I think it's useful to estimate high confidence upper bounds on risk of unfamiliar (and inherently risky) activities. However, ultimately you'd still have to decide whether that risk is tolerable, and it's not clear what that threshold should be, if we even are supposed to have a strict threshold to govern our decision-making. 
+I think it's useful to estimate high confidence upper bounds on risk of unfamiliar (and inherently risky) activities. However, ultimately you'd still have to decide whether that risk is tolerable, and it's not clear what that threshold should be (or even if you should live according to a strict threshold). 
 
-But probably, your estimated risk of so-and-so activity should not be too much higher than the background risk. There's a sentiment on wallstreet to never go all in, as it's best to minimize risk where the downside is infinite.
+Probably though, your estimated risk of so-and-so activity should not be too much higher than the background risk. There's a sentiment on wallstreet to never go all in, as it's best to minimize risk where the downside is infinite.
 
 <!---
 

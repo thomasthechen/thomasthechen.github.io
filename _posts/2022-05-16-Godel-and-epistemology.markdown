@@ -10,7 +10,7 @@ In the 20th century there was a push to axiomitize math by looking for a set of 
 
 These results are interesting both technically and philosophicallly. From a technical perspective, the result has fascinating connections with computability theory; also, the proof itself uses neat ideas like Chinese Remainder Theorem to encode arbitrary sequences of bits into integers. Philosophically, people have argued over the interpretation of Godel's theorems since their inception. One canonical, though flawed, interpretation is that Incompleteness shows that the brain is capable of more than a computer (Turing machine). Roger Penrose, the famous mathematical physicist, wrote a book, The Emperor's New Mind, on this argument. Besides cognition and AI, there are also discussions about the foundations of math and epistemology ("how do we know things").
 
-There's a lot to dig into here, but I hope to cover both the technical and philosophical sides in this post. The technicals will be closely based on Steve Cook and Toni Pitassi's lecture notes, while the philosophical side will be based on whatever I find on the internet. This post will be more technical in nature, but I'll do my best to distill the main ideas down. There's a purely philosophical section towards the end after all the technical details.
+There's a lot to dig into here, but I hope to cover both the technical and philosophical sides in this post. The technicals will be closely based on Steve Cook and Toni Pitassi's lecture notes, while the philosophical side will be based on the views of some prominent mathematicians. This post will be technical in nature, but I'll do my best to distill the high-level ideas down.
 
 ## The First Incompleteness Result
 
@@ -208,7 +208,7 @@ Note that since G is "I am not provable in PA", then the statement "If PA were c
 
 ## Philosophy
 
-We'll now get into higher level, philosophical interpretations of Godel's theorems. I actually haven't read these in too much depth, so I'll just outline most basic arguments, drawing ideas from Roger Penrose, Scott Aaronson, Alan Turing, and the depths of the credible internet. I'll also add in my own thoughts and questions.
+We'll now get into higher level, philosophical interpretations of Godel's theorems. I actually haven't read these in too much depth, so I'll just outline most basic arguments, drawing ideas from Roger Penrose, Scott Aaronson, and Alan Turing. I'll also add in my own thoughts and questions.
 
 # Foundations of Math
 
