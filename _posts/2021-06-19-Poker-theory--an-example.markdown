@@ -134,9 +134,9 @@ There exists a mix of calling and folding that optimizes P2's EV: calling 50% of
 Thus, at equilibrium, P1 bets 100% of AA and 50% of QQ, and checks 50% of QQ. P2 calls 50% and folds 50%. $$EV_1 = 75$$ and $$EV_2 = 25$$.
 
 
-## Commentary on Key Concepts
+## Commentary on Key Concepts and Practical Implications
 
-We'll start by elaborating on the key concepts highlighted.
+We'll start by elaborating on the key concepts highlighted, then delve into their highly practical implications for your game.
 
 **Key Concept 3** 
 
