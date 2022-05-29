@@ -60,6 +60,10 @@ $$ (s0 < x) \wedge \forall z \leq x, \forall y\leq x (x = z \cdot y \supset (z =
 
 `Definition:` An $$\exists\Delta_0$$ formula is one of the form $$\exists y A$$, where A is a $$\Delta_0$$ formula. Further, a relation R is a $$\exists\Delta_0$$ relation iff some $$\exists\Delta_0$$ formula A represents R.
 
+<br>
+
+<br>
+
 From these definitions, we claim the following.
 
 `Key Theorem:` A relation is r.e. if and only if it is $$\exists\Delta_0$$
@@ -270,7 +274,7 @@ Moreover, even assuming someone "saw" PA's consistency, how would you even verif
 
 > To which the age-old rebuttal applies: "How do you know the machine didn't feel that F is consistent, too?"
 
-In this way, the Incompleteness-based anti-mechanism argument is just the same age-old anti-mechanism argument that machines can't "feel" as we humans do. Ultimately, it is unsatisfying because there's no way to tell if someone actually ascertains the truth of PA, or if they are just assuming its consistency a priori. If the latter is the case, then if we gave a machine the same freedom to assume consistency of PA, it would also be able to prove G(F). And then the alleged gap between human and machine's capabilities would disappear. In short, it's unclear that we can take the following for granted:
+In this way, the Incompleteness-based anti-mechanism argument is just the same age-old anti-mechanism argument that machines can't "feel" as we humans do. Ultimately, it is unsatisfying because there's no way to tell if someone actually ascertains the consistency of F, or if they are just assuming its consistency a priori. If the latter is the case, then if we gave a machine the same freedom to assume consistency of F, it would also be able to prove G(F). And then the alleged gap between human and machine's capabilities would disappear. In short, it's unclear that we can take the following for granted:
 
 (1) Humans can "see" truths machines can't
 
@@ -290,18 +294,18 @@ My second question is around our perception of true and false. Labeling things a
 
 # Why Math Works
 
-Quantitative theories have provided exceptionally accurate predictions about our world--Newtonian mechanics and gravity, quantum mechanics, relativity, groups, games, economics, probability, complexity, quantum computing, etc. As complex as the universe is, several truths about it can be described in terms of some simple axioms, like those used to generate these mathematical theories. That's kind of amazing. To what does our universe owe such a luxury? After all, it would also have been conceivable if, instead, the universe was too unintelligibly complex to model with any laws or axioms. 
+Quantitative theories have provided exceptionally accurate predictions about our world--Newtonian mechanics and gravity, quantum mechanics, relativity, groups, games, economics, probability, complexity, quantum computing, etc. As complex as the universe is, several truths about it can be described in terms of some simple axioms, like those used to generate these mathematical theories. That's kind of amazing because it seems like it didn't have to be this way. To what does our universe owe such a luxury? After all, it would also have been conceivable if, instead, the universe was just unintelligibly complex. 
 
 I suppose there is no answer to why the universe would be inherently simple--just that aspects of it are.  The universe is not maximally complex, and there is _order_ that we can describe using simple axioms. After all, isn't that the founding assumption of mathematics?
 
 What usually seems amazing is not the axioms themselves, as those often seem fairly self-evident. But the vast array of complex theorems you can derive from them. In PA, the first axiom "There is no number whose successor is 0" is not so amazing by itself, yet theorems you can derive, like Fermat's last theorem, are truly remarkable. Newton's laws are concise, but the array of physical scenarios you can analyze with them (all the Intro Physics exams ever written) seem far more remarkable. Yet, even though we tend to find the axioms' deductions amazing, the axioms themselves do "summarize" all these truths, after all. Thus, perhaps instead we ought to marvel at the axioms for their simplicity, not their consequences.
 
-Of course, not all truths are derivable from axioms. TA is entirely too complex to be captured by an axiomitizable theory, as we saw with Tarski's theorem. But all the same, axiomitizable theories do extremely well in describing our world, as theories like ZFC basically capture all mathematics we have so far. So perhaps some truths in the universe are not modeled by simple laws (in fact, maybe 99.99% of them aren't). But even so, the 0.01% of them that are governed by simple laws allow for the highly accurate, elegant theories we have today. And even if the "simply-modelable" slice of truth is actually a miniscule fraction of all truths, they are clearly still exceedingly useful.
+Of course, not all truths are derivable from axioms. TA is too complex to be captured entirely by an axiomitizable theory, as we saw with Godel's first theorem. But all the same, axiomitizable theories do extremely well in describing our world, as theories like ZFC basically capture all mathematics we have so far. So perhaps some truths in the universe are not modeled by simple laws (in fact, maybe 99.99% of them aren't). But even so, the 0.01% of them that are governed by simple laws allow for the highly accurate, elegant theories we have today. And even if the "simply-modelable" slice of truth is actually a miniscule fraction of all truths, they are clearly still exceedingly useful.
 
 
 ## Concluding Remarks
 
-To end this post, I wanted to point out how intricately connected CS is to Logic. In my opinion, Incompleteness is among the most elegant mathematical results, and it will take your thoughts to weird and interesting places, even beyond the math itself. To this point, Aaronson once said that CS ought to be renamed "Quantitative Epistemology," a suggestion I find endearing. 
+To end this post, I wanted to point out how intricately connected CS is to Logic. In my opinion, Incompleteness is among the most elegant mathematical results, and it will take your thoughts to weird and interesting places, even beyond the math itself. To this point, Aaronson once jokingly said that CS ought to be renamed "Quantitative Epistemology," a suggestion I find endearing. 
 
 ## References
 
