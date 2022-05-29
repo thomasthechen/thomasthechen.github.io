@@ -6,28 +6,30 @@ categories: jekyll update
 ---
 ## Introduction
 
-In the 20th century there was a push to axiomitize math by looking for a set of axioms from which all of math could be derived. In this search, people considered Peano Arithmetic (PA), a set of 6 axioms plus induction. However, in 1931 Godel released two incompleteness theorems that PA could not axiomitize all of math. His first incompleteness theorem shows the existence of statements that are not provable in PA, of the form "I am not provable". His second incompleteness theorem shows that PA cannot prove its own consistency (the statement, "PA is consistent").
+In the 20th century there was a push to axiomitize math, as people searched for a set of axioms from which all of math could be derived. In this search, they considered Peano Arithmetic (PA), a set of 6 axioms plus induction. However, in 1931 Godel released two incompleteness theorems that PA could not axiomitize all of math. His first incompleteness theorem shows the existence of statements that are not provable in PA, which were of the form "I am not provable". His second incompleteness theorem shows that PA cannot prove its own consistency: in particular, the statement "PA is consistent".
 
-These results are interesting both technically and philosophicallly. From a technical perspective, the result has fascinating connections with computability theory. Philosophically, people have argued over the interpretation of Godel's theorems since their inception. One canonical (though arguably flawed) interpretation is that Incompleteness shows that the brain is capable of more than a computer (Turing machine). Besides cognition and AI, there are also discussions about the foundations of math and epistemology (how do we know things).
+These results are interesting both technically and philosophicallly. From a technical perspective, the results have fascinating connections with computability theory. Philosophically, people have argued over the interpretation of Godel's theorems since their inception. One canonical (though arguably flawed) interpretation is that Incompleteness shows that the brain is more capable than a computer (in particular, a Turing Machine). Besides cognition and AI, there are also discussions about the foundations of math and epistemology (how do we know things).
 
-I hope to cover both the technical and philosophical sides in this post. The technicals will be closely based on Stephen Cook and Toni Pitassi's lecture notes, while the philosophical discussion will be based on the views of some prominent mathematicians. This post will be technical, but in the interest of concision and readability, I'll write down only the key arguments and put the other technical proofs in the appendix, at the bottom.
+I hope to cover both the technical and philosophical sides in this post. The technicals will be closely based on Stephen Cook and Toni Pitassi's lecture notes, while the philosophical discussion will be based on the views of some prominent mathematicians. This post will be technical, but in the interest of concision and readability, I'll write down only the key arguments and put rest of the technical proofs in the appendix.
 
 ## The First Incompleteness Result
 
 # Proof Sketch
 
+A more general version of Godel's first incompleteness result is that TA cannot be _axiomitized_. For any set of axioms, such as PA, there is always some statement in TA that can't be proved from them. Before showing this, we'll first clarify our notation.
+
 `Notation:` 
 - By arithmetic, we mean the set of sentences formed from the vocabulary $$L_A = [0, s, +, \cdot; =]$$. 
 
-- Also, let $$\mathbb{N}$$ be the standard model for $$L_A$$: which assigns each symbol their usual interpretation: E.g. $$\cdot$$ means multiply, 0 means 0, s0 means 1, where s is the "successor" function. 
+- Also, let $$\mathbb{N}$$ be the standard model for $$L_A$$: which assigns each symbol their usual interpretation: E.g. $$\cdot$$ means multiply, the symbol 0 means the value 0, the symbol s0 means 1, and the symbol sx means x + 1. So s is a "successor" function. 
 
 - Let $$\phi_0$$ denote the set of all $$L_A$$ sentences (either true or false).
 
 - Let $$TA$$ (True Arithmetic) be the set of sentences with vocabulary $$L_A$$ that are _true_ under the standard model, $$\mathbb{N}$$. That is, $$TA = \{ A \in \phi_0 : \mathbb{N} \models A\}$$, where we use $$\models$$ to denote "logical consequence". In particular, $$\mathbb{N} \models A$$ means that $$A$$ is a logical consequence of $$\mathbb{N}$$.
 
-A more general version of Godel's first incompleteness result is that TA cannot be "axiomitized". For any set of axioms, such as PA, there is always some statement in TA that can't be proved from them. To talk about this more precisely, we review some concepts from computability theory:
+We'll also review some concepts from computability theory:
 
-- _relation/language_ - a relation (equivalently, a language) is a subset of all strings of bits. E.g. Prime(x) is a relation that contains all strings that encode prime numbers
+- _relation/language_ - a relation (equivalently, a language) is a subset of all bit-strings. E.g. Prime(x) is a relation that contains all strings of bits that encode prime numbers
 
 - _r.e./recognizable_ - a language is r.e. (equivalently, recognizable) if a Turing Machine (TM) recognizes it. i.e. there's a TM that accepts  all elements in the language.
 
@@ -35,26 +37,28 @@ A more general version of Godel's first incompleteness result is that TA cannot 
 
 Now we are ready to introduce new concepts. 
 
-`Definition:` We say that arithmetic formula A represents relation R if whenever x is in R, A(x) is true in arithmetic. Conversely, when x is not in R, A(x) is false. 
+`Definition:` We say that arithmetic formula A represents relation R if whenever a string x is in R, A(x) is a true statement in arithmetic. Conversely, when x is not in R, A(x) is a false statement. 
 
 $$R(x) \iff \mathbb{N} \models A(x)$$
 
-For instance, the relation "x divides y" is represented by the arithmetic formula, 
+For instance, the relation "x divides y", containing all x and y where x divides y, is represented by the following arithmetic formula. One can see that when x dividies y, the corresponding statement is true, and false otherwise.
 
 $$A(x, y) = \exists z (x \cdot z = y)$$
+
+With the concept of arithmetic formulas representing relations, we define an important term.
 
 `Definition:` A relation R is arithmetical iff it is represented by some formula.
 
 
 We now define some special types of arithmetic formulas that we will use in the proof sketch.
 
-`Definition:` A $$\Delta_0$$ relation is one where the quantified variables are bounded (in $$\forall x \leq 4$$, x is bounded). Further, R(x) is a $$\Delta_0$$ relation iff some $$\Delta_0$$ formula A represents R.
+`Definition:` A $$\Delta_0$$ formula is one where the quantified variables are bounded (in $$\forall x \leq 4$$, x is bounded). Further, a relation R is a $$\Delta_0$$ relation iff some $$\Delta_0$$ formula A represents R.
 
 As an example, the relation Prime(x) is represented by the following $$\Delta_0$$ formula, which roughly says that "x is bigger than 1 (aka the successor of 0, s0), and for any y less than x that divides x, the remainder is either 1 or x".
 
 $$ (s0 < x) \wedge \forall z \leq x, \forall y\leq x (x = z \cdot y \supset (z = 1 \vee z = x))$$
 
-`Definition:` An $$\exists\Delta_0$$ relation is one of the form $$\exists y A$$, where A is a $$\Delta_0$$ formula. Further, R(x) is a $$\exists\Delta_0$$ relation iff some $$\exists\Delta_0$$ formula A represents R.
+`Definition:` An $$\exists\Delta_0$$ formula is one of the form $$\exists y A$$, where A is a $$\Delta_0$$ formula. Further, a relation R is a $$\exists\Delta_0$$ relation iff some $$\exists\Delta_0$$ formula A represents R.
 
 From these definitions, we claim the following.
 
@@ -64,13 +68,19 @@ Every r.e. relation can be represented by an $$\exists\Delta_0$$ arithmetic form
 
 `Corollary:` TA is not r.e.
 
-_Proof:_ Consider the halting problem, $$K$$: on input $$x$$, $$K(x) = 1$$ if $$x$$ encodes a TM that halts on input $$x$$, and is 0 otherwise. It is well known that $$K$$ is r.e. (while $$K^c$$, the complement of the halting problem, is not r.e). Thus, $$K$$ is represented by some $$\exists \Delta_0$$ formula $$A(x)$$, which crucially means that $$K^c(x)$$ is represented by $$\neg A(x)$$.
+_Proof:_ Consider the famous Halting relation, $$K$$.
+
+ > $$K$$  (Halting Problem): for a bit-string $$x$$, $$x \in K$$ if and only if $$x$$ encodes a Turing Machine (TM) that halts when run on input string $$x$$
+ 
+ It is well known that $$K$$ is r.e. Thus, $$K$$ is represented by some $$\exists \Delta_0$$ formula $$A(x)$$. Crucially, this means that $$K^c$$, the complement of the Halting problem, is represented by $$\neg A(x)$$. Thus,
 
 $$n \in K^c \iff \neg A(n) \in TA$$
 
-This crux of this _reduction_ argument is that if TA is r.e., then $$K^c$$ is also r.e. Because $$K^c$$ is, in fact, not r.e., TA cannot be r.e. either. $$\blacksquare$$
+The crux of this _reduction_ argument is that if TA is r.e., then $$K^c$$ is also r.e. The final (well known) key fact is that $$K^c$$ is actually not r.e. Thus, TA cannot be r.e. either. $$\blacksquare$$
 
-This last corollary is a statement about the complexity of TA, which we'll say more about later. While it doesn't look like it, it implies Godel's first incompleteness theorem. To see this, we'll introduce a few more definitions.
+This last corollary is a statement about the complexity of TA--how complicated the relation, TA, is. We'll say more about later. 
+
+While it doesn't look like it, this corollary implies Godel's first incompleteness theorem. To see this, we'll introduce a few more definitions.
 
 `Definition:` A theory is a set $$\Sigma$$ of sentences closed under logical consequence ($$\models$$). That is, if $$\Sigma \models A$$, then $$A \in \Sigma$$. 
 
@@ -78,7 +88,11 @@ This last corollary is a statement about the complexity of TA, which we'll say m
  - $$\Sigma$$ is complete iff $$\Sigma$$ is consistent and for all sentences A, $$\Sigma \models A$$ or $$\Sigma \models \neg A$$ (but not both). 
  - $$\Sigma$$ is sound iff $$\Sigma \subset TA$$
 
- Roughly, a theory is sound if it does not have any false statements. A theory is complete if it contains all possible true statements. A theory is consistent if it doesn't have both $$A$$ and $$\neg A$$. Note that if a theory $$\Sigma$$ did have both a statement and its negation, then any statement in $$\phi_0$$ would be a logical consequence of the theory, and thus $$\Sigma = \phi_0$$. i.e. if we claim that a statement A is both true and false, then anything follows after that. (If Big Brother can convince you that something is simultaneously true and false, then they can convince you of anything). Note, however, that a theory may have "false" statements but still be consistent, if it doesn't contain the corresponding negation.
+ Roughly, a theory is sound if it does not have any false statements. 
+ 
+ A theory is consistent if it doesn't have both $$A$$ and $$\neg A$$. Note that if a theory $$\Sigma$$ did have both a statement and its negation, then any statement in $$\phi_0$$ would be a logical consequence of the theory, and thus $$\Sigma = \phi_0$$. That is, if we claim that a statement A is both true and false, then anything follows after that. (Double-think: If Big Brother can convince you that something is simultaneously true and false, then they can convince you of anything). Note, however, that a theory may have "false" statements but still be consistent, if it doesn't contain the corresponding negation.
+
+ Finally, a theory is complete if it is consistent and always proves either $$A$$ or $$\neg A$$
 
 `Definition:` If $$\Sigma$$ is a theory and $$\Gamma \subset \Sigma$$, then $$\Gamma$$ is a set of axioms for $$\Sigma$$ iff the following two conditions are met
 - $$\Gamma$$ is recursive 
@@ -88,7 +102,7 @@ It turns out the following key claim is true.
 
 `Theorem:` A theory $$\Sigma$$ is axiomitizable iff it is r.e.
 
-We will omit a proof for this, but the immediate consequence of this theorem and the fact that TA is not r.e. is that TA is not axiomitizable. This is essentially the statement of Godel's First Incompleteness Theorem. Any set of axioms is insufficient for proving all true statements in True Arithmetic. No matter which axioms we choose, there is always something in TA that's outside what we can prove from those axioms. In particular, there is a statement in TA that's not provable in PA.
+We will omit a proof for this, but the immediate consequence of this theorem and the fact that TA is not r.e. is that TA is not axiomitizable. This is essentially the statement of Godel's First Incompleteness Theorem. Any set of axioms is insufficient for proving all true statements in True Arithmetic. No matter which (sound) axioms we choose, there is always something in TA that's outside what we can prove from those axioms. In particular, there is a statement in TA that's not provable in PA.
 
 `Theorem (Godel):` TA is not axiomitizable!
 
@@ -109,38 +123,40 @@ _Proof:_ If $$\Sigma$$ is sound, then $$\Sigma \subset TA$$, and if it is axiomi
 
 # The Arithmetic Hierarchy and Tarski's Theorem
 
-What we showed above is that TA is not r.e. In fact, we can prove a much stronger result: TA is not arithmetical. This is Tarski's Theorem. This result is stronger in that it asserts the complexity of TA is much higher than simply "not r.e.". To make reference to complexity clear, we will introduce the Arithmetic Hierarchy (AH), depicted below.
+We showed above that TA is not r.e. In fact, we can prove a much stronger result: TA is not arithmetical. This is Tarski's Theorem. This result is stronger in that it asserts the complexity of TA is much higher than simply "not r.e.". To make reference to complexity clear, we will introduce the Arithmetic Hierarchy (AH), depicted below.
 
 <center><img src="/images/AH.png" alt="drawing" width="350"/></center>
 
-AH is a hierarchy of relations (languages), ordered by complexity. Relations that belong to the "higher" sets are more complex in the following sense.
+Each label, e.g. $$\Sigma_1$$, corresponds to a set of relations. AH is a hierarchy of these sets of relations, ordered by complexity. Relations that belong to the "higher" sets are more complex in the following sense.
 
-Each set that's depicted is characterized by arithmetic formulas of a particular form. For instance, $$\Sigma_1$$, on the bottom left, is characterized by $$\exists \Delta_0$$ formulas. As we proved earlier, this set consists of all r.e. relations, because a relation is r.e. iff it is representable by an $$\exists \Delta_0$$ formula. The set $$\Pi_1$$, bottom right, consists of co-r.e. sets, which are represented by the negation of a $$\Sigma_1$$ formula. For $$k \geq 1$$, we define a $$\Sigma_k$$ formula to be of the form:
+Each set depicted is characterized by arithmetic formulas of a particular form. For instance, $$\Sigma_1$$, on the bottom left, is characterized by $$\exists \Delta_0$$ formulas. As we proved earlier, this set consists of all r.e. relations, because a relation is r.e. iff it is representable by an $$\exists \Delta_0$$ formula. The set $$\Pi_1$$, bottom right, consists of co-r.e. sets, which are represented by the negation of a $$\Sigma_1$$ formula. For $$k \geq 1$$, we define a $$\Sigma_k$$ formula to be of the form:
 
 $$\exists y_1 \forall y_2 \exists y_3 ... Qy_k A(x, y_1, ... y_k)$$
 
-Where the quantifiers alternate between exists and for-all. Note that $$\Sigma_k, k \geq 2$$ relations that are far more non-computable than the halting problem or its complement (No TM can even hope to recognize such a language). Finally, note that all r.e. relations are arithmetical (as $$\Sigma_1 \subset AH$$), but not all arithmetical relations are r.e., as they are more complex.
+Where the quantifiers alternate between exists and for-all. Note that for $$k \geq 2$$, $$\Sigma_k$$ relations are far more non-computable than the Halting problem (No TM can even hope to recognize such a language). 
 
 Tarski's theorem says: not only is TA not r.e., it is not even arithmetical. TA isn't co-r.e., $$\Sigma_2$$, $$\Sigma_3,... etc.$$, or anything in AH; it is wildly non-computable! Tarski's theorem is far stronger claim about the complexity of TA than Godel's first incompleteness theorem. 
 
 `Theorem (Tarski):` TA is not arithmetical.
 
-_Proof:_ The proof uses self-referential sentences. Consider the sentence A: "I am false". If A is true, then this means that A is false, which is a contradiction. By itself, this isn't (formally) a contradiction.
+_Proof:_ The proof uses self-referential sentences. Consider the sentence F: "I am false". If F is true, then this means that F is false, which seems like a contradiction. By itself, this isn't (formally) a contradiction.
 
-But now suppose, towards contradiction, that TA is arithmetical. This means that there exists an arithmetical formula, R, that when given a statement in arithmetic, tells you whether that statement is true (i.e. in TA). This is a strong assumption since it implies that whether an arithmetic statement is true can be succinctly captured in some (arithmetic) formula.
+But now suppose, towards contradiction, that TA is arithmetical. This means that there exists an arithmetical formula, A, that when given a statement in arithmetic, tells you whether that statement is true (i.e. in TA). This is a strong assumption since it implies that whether an arithmetic statement is true can be succinctly captured in an arithmetic formula.
 
-Then, we reach a contradiction if we ask what R outputs on A. If R outputs "true" on A, then A must be false--If R outputs "false" on A, A must be true!
+Then, we reach a contradiction if we ask what A outputs on F. If A outputs "true" on F, then F must be false--If A outputs "false" on F, F must be true!
 
-$$R(A) = 1 \iff A \text{ is false} \iff R(A) = 0$$
+$$A(F) = 1 \iff F \text{ is false} \iff A(F) = 0$$
 
-We conclude that such an arithmetic formula, R, cannot exist. That is, TA is not arithmetical. Roughly, we conclude that TA is an exceedingly complicated relation and cannot be captured by any particular arithmetic formula in the way that, say, Prime(x) can. $$\blacksquare$$
+We conclude that such an arithmetic formula, A, cannot exist. That is, TA is not arithmetical. Roughly, we conclude that TA is such an exceedingly complicated relation that it cannot be captured by any particular arithmetic formula in the way that, say, Prime(x) can. 
 
-The real proof in reference [1] is essentially a formal way of writing what we sketched above. Finally, since $$\Sigma_1 \subset AH$$, Tarski's theorem immediately implies the result we showed earlier: TA is not r.e.
+The actual proof in reference [1] essentially formalizes what we sketched here. $$\blacksquare$$
+
+Finally, note that all r.e. relations are arithmetical, as $$\Sigma_1 \subset AH$$ (But not all arithmetical relations are r.e.). Thus, Tarski's theorem immediately implies the result we showed earlier: TA is not r.e.
 
 
 # Undecidability Results
 
-There are a variety of interesting connections between Incompleteness and Undecidability that we are now in a position to discuss. Roughly speaking, undecidability/decidability corresponds to whether a relation is r.e. or "easier" than r.e. These results are about the complexity of a theory in relation to certain properties of the theory (soundness, completeness, etc.)
+There are a variety of interesting connections between Incompleteness and Undecidability that we are now in a position to discuss. Roughly speaking, the difference between undecidability/decidability corresponds to complexity--is a relation decidable (recursive) or undecidable (harder than recursive). There are results for the complexity of a theory in terms of whether they're sound, complete, etc.
 
 First, we define the theory, VALID: the set of statements that are true under any interpretation of $$L_A$$ (under any "model"). 
 
@@ -161,11 +177,11 @@ Finally, we state some results about these theories without proof. Recall from b
 An extension of RA is simply a theory that contains RA. So interestingly, any (axiomitizable) theory $$\Sigma$$ such that $$RA \subset \Sigma \subset TA$$ is both undecidable and incomplete.
 
 
-So far, these have been some undecidability results. Which theories are decidable?
+So far, we've discussed undecidable theories. Which theories are decidable?
 
 `Theorem (Decidability Theorem):` Every complete, axiomitizable theory is decidable.
 
-From a previous result, it also follows that every axiomitizable, complete (i.e. they're consistent and prove either $$A$$ or $$\neg A$$) theory is not sound. Thus, axiomitizable theories that are complete are not only decidable, they are necessarily unsound (containing untrue theorems).
+From a previous result, it also follows that every axiomitizable, complete theory is not sound. Thus, axiomitizable theories that are complete are not only decidable, they are necessarily unsound (containing untrue theorems).
 
 # Final Remarks
 
@@ -207,22 +223,22 @@ We'll now get into higher level, philosophical interpretations of Godel's theore
 
 # Foundations of Math
 
-The most direct philosophical implication of Incompleteness is that it poses serious obstacles to those who are trying to completely axiomitize mathematics ("Hilbert's Program"). Suppose we all agree on some sufficiently complex vocabulary $$(L_A)$$ and some interpretation for the symbols in that vocabulary (e.g. the standard interpretation, $$\mathbb{N}$$). Then we can't summarize all true statements with a simple (computable) set of axioms.
+The most direct philosophical implication of Incompleteness is that it poses serious obstacles to those who are trying to completely axiomitize mathematics ("Hilbert's Program"). Suppose we all agree on some sufficiently complex vocabulary $$(L_A)$$ and some interpretation for the symbols in that vocabulary (e.g. the standard interpretation, $$\mathbb{N}$$). Then we can't summarize all true statements with a simple (recursive) set of axioms.
 
 There's debate on whether Incompleteness has concrete implications for different philosophies of mathematics, such as Logicism and Intuitionism. We'll briefly define Logicism
 
 > Logicism: All the objects forming the subject matter of those branches of math are logical objects; Further, Logic is capable of generating a mathematician’s ‘first principles’: the basic definitions of a branch of math. Every process in mathematics is a logical process. [3]
 
-Logicism makes very strong claims about the power of Logic, with a flavor that's reminiscent of Plato. Plato claimed that there were abstract "forms" from which all truths were derived. They served as first principles to justice (the topic he was addressing). He viewed the ability to acquire these first principles and to deduce truth from them as the ultimate cognitive capability (and that philosophers, the only people with this capability, ought to be king).
+Logicism makes very strong claims about the power of Logic, with a flavor that's reminiscent of Plato. Plato claimed that there were abstract "Forms" from which all truths were derived. The "Forms" served as first principles to justice, from whcih everything that was just could be derived. He viewed the ability to acquire these first principles and to deduce truth from them as the ultimate cognitive capability (and that philosophers, the only people with this capability, ought to be king).
 
 Logic within a formal proof system, at least, seems to fall short of this Platonic ideal. There isn't a set of "forms" or axioms for all of TA, much less all truths for justice and human behavior. Incompleteness seems like a strong barrier to Logicism. Apparently, Godel also argued against logicism using Incompleteness [2].
 
 
 # Limits of AI?
 
-The argument against Logicism in the previous section cited the limitation of formal logic. This begs the question: can a human's reasoning capabilities be described as a formal proof system? Are we nothing more than theorem provers working within the confines of some proof system? Or if not, does Incompleteness say anything definitive about human cognition being more powerful than a computer? The latter is an extremely loaded question, with high caliber mathematicians arguing either side.
+The argument against Logicism in the previous section cited the limitation of formal logic. This begs the question: can a human's reasoning capabilities be described as a formal proof system? Are we nothing more than theorem provers working within the confines of some proof system? Or if not, does Incompleteness say anything definitive about human cognition being more powerful than a computer? The latter is a loaded question, with high caliber mathematicians arguing either side.
 
-Regarding the anti-mechanism argument in favor of super-Turing human cognition, J.R. Lucas claimed that Incompleteness is evidence for super-Turing cognition since
+Regarding the anti-mechanism argument in favor of super-Turing human cognition, Philosopher J.R. Lucas claimed that Incompleteness is evidence for super-Turing cognition since
 
 
 > Given any machine which is consistent and capable of doing simple arithmetic, there is a formula it is incapable of producing as being true … but which we can see to be true.
@@ -232,7 +248,7 @@ This refers to the first of Godel's theorems--Any given formal system F (like PA
 
 This is the view of Nobel Laureate Roger Penrose. Penrose, in fact, believes in a much stronger statement: the brain is not just super-Turing, it uses so-far undiscovered laws of quantum-gravity to do information processing that classical computers can't. Furthermore, all this super-Turing computation happens on a micro-level in the microtubules of our cells. This is his central claim in his famous book, The Emperor's New Mind [4].
 
-However, the Incompleteness-based anti-mechanism argument is arguably problematic. The standard rebuttal is that the anti-mechanistic argument mistakes the first Incompleteness theorem as saying "G(F) has no proof in F". In fact, the first Incompleteness theorem says that "If F is consistent, G(F) has no proof in F". Thus, if a human really can "see" the truth of G(F), finding a proof that a machine couldn't, then surely the human must also be able to "see" that F is consistent.
+However, the Incompleteness-based anti-mechanism argument is arguably problematic. The standard rebuttal is that the anti-mechanistic argument mistakenly cites the first Incompleteness theorem as saying "G(F) has no proof in F". In fact, the first Incompleteness theorem says that "If F is consistent, G(F) has no proof in F". Thus, if a human really can "see" the truth of G(F), finding a proof that a machine couldn't, then surely the human must also be able to "see" that F is consistent.
 
 Let's try test this supposition. Here are the axioms to Peano Arithmetic, PA. Can you "see" that these form a consistent theory--that there will be no theorem along the way that is proved both true and false by PA? 
 
@@ -250,7 +266,7 @@ Moreover, even assuming someone "saw" PA's consistency, how would you even verif
 
 > The skeptic replies: "Really? how can you know you're not just, say, assuming its consistency?"
 
-> The anti-mechanist, indignant, exclaims: "The machine is just shuffling symbols around--I, on the other hand, actually felt that PA is consistent". 
+> The anti-mechanist, indignant, exclaims: "I can feel its consistency. The machine, on the other hand, is just shuffling symbols around". 
 
 > To which the age-old rebuttal applies: "How do you know the machine didn't feel that PA is consistent, too?"
 
@@ -266,7 +282,7 @@ Whichever side you believe, it's at least not straightforward to use Incompleten
 
 # Epistemology
 
-A question that lingers in my mind is: what is an accurate characterization of our cognitive abilities--in particular, our ability to reason? We've been able to reason logically for all of history, without the development of formal logic. We can talk about a "proof by contradiction" without the need for a notion of a "contrapositive". We can talk about "definitions" and "induction" without the need for formal axioms. We (by we, I mean Godel) proved highly-nontrivial results about logical proof systems using our own deductive facilities. 
+A question that lingers in my mind is: what is an accurate characterization of our cognitive abilities--in particular, our ability to reason? We've always had an intuitive ability to reason without needing the development of formal logic. We can talk about a "proof by contradiction" without the need for a notion of a "contrapositive". We can talk about "definitions" and "induction" without the need for formal axioms. We (by we, I mean Godel) proved highly-nontrivial results about logical proof systems using our own deductive facilities. 
 
 What is it that lets us reason according to rules we never even formalized? Are we mechanistic proving machines, just working in a stronger formal proof system? Or do we truly possess some super-Turing ability to gaze into the Platonic heavens?
 
@@ -274,13 +290,13 @@ My second question is around our perception of true and false. Labeling things a
 
 # Why Math Works
 
-Quantitative theories have provided exceptionally accurate predictions about our world--Newtonian mechanics and gravity, quantum mechanics, relativity, groups, games, economics, probability, complexity, quantum computing, etc. As complex as the universe is, several truths about it can be described in terms of some simple axioms, like those used to generate these mathematical theories. That's kind of amazing. To what does our universe owe such a luxury? After all, it would also have been conceivable if, instead, the universe was unintelligibly complex to model with simple axioms. 
+Quantitative theories have provided exceptionally accurate predictions about our world--Newtonian mechanics and gravity, quantum mechanics, relativity, groups, games, economics, probability, complexity, quantum computing, etc. As complex as the universe is, several truths about it can be described in terms of some simple axioms, like those used to generate these mathematical theories. That's kind of amazing. To what does our universe owe such a luxury? After all, it would also have been conceivable if, instead, the universe was too unintelligibly complex to model with any laws or axioms. 
 
 I suppose there is no answer to why the universe would be inherently simple--just that aspects of it are.  The universe is not maximally complex, and there is _order_ that we can describe using simple axioms. After all, isn't that the founding assumption of mathematics?
 
-Perhaps what is amazing is not the axioms themselves, as those often seem fairly self-evident. But the vast array of complex theorems you can derive from them. In PA, the first axiom "There is no number whose successor is 0" is not so amazing by itself, yet theorems you can derive, like Fermat's last theorem, are truly remarkable. Newton's laws are non-trivial, but the array of physical scenarios you can analyze with them (all the AP Physics exams ever written) is far more remarkable. Yet, even though we tend to find the axioims' deductions amazing, the axioms themselves do "summarize" all these truths, after all. Thus, perhaps instead we ought to marvel at the axioms, for their simplicity.
+What usually seems amazing is not the axioms themselves, as those often seem fairly self-evident. But the vast array of complex theorems you can derive from them. In PA, the first axiom "There is no number whose successor is 0" is not so amazing by itself, yet theorems you can derive, like Fermat's last theorem, are truly remarkable. Newton's laws are concise, but the array of physical scenarios you can analyze with them (all the Intro Physics exams ever written) seem far more remarkable. Yet, even though we tend to find the axioms' deductions amazing, the axioms themselves do "summarize" all these truths, after all. Thus, perhaps instead we ought to marvel at the axioms for their simplicity, not their consequences.
 
-Of course, not all truths are derivable from axioms. TA is entirely too complex to be captured by an axiomitizable theory, as we saw with Tarski's theorem. But all the same, axiomitizable theories do extremely well, as theories like ZFC basically capture all mathematics we have so far. So perhaps some truths in the universe are not modeled by simple laws (in fact, maybe 99.99% of them aren't). But even so, the 0.01% of them that are governed by simple laws allow for the highly accurate, elegant theories we have today. And even if the "simply-modelable" slice of truth is actually a miniscule fraction of all truths, they are clearly still exceedingly useful.
+Of course, not all truths are derivable from axioms. TA is entirely too complex to be captured by an axiomitizable theory, as we saw with Tarski's theorem. But all the same, axiomitizable theories do extremely well in describing our world, as theories like ZFC basically capture all mathematics we have so far. So perhaps some truths in the universe are not modeled by simple laws (in fact, maybe 99.99% of them aren't). But even so, the 0.01% of them that are governed by simple laws allow for the highly accurate, elegant theories we have today. And even if the "simply-modelable" slice of truth is actually a miniscule fraction of all truths, they are clearly still exceedingly useful.
 
 
 ## Concluding Remarks
