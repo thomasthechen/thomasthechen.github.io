@@ -254,21 +254,21 @@ Let's try test this supposition. Here are the axioms to Peano Arithmetic, PA. Ca
 
 <center><img src="/images/pa.png" alt="drawing" width="500"/></center>
 
-Moreover, even assuming someone "saw" PA's consistency, how would you even verify that they could? As such, the typical exchange between the anti-mechanist and the skeptic goes as following.
+Moreover, even assuming someone "saw" PA's consistency, how would you even verify that they could? As such, the typical exchange between the anti-mechanist and the skeptic goes as following, where F is some formal proof system like PA.
 
-> Skeptic: "When you say you saw the truth of PA, how can I know that you're doing something a machine can't"
+> Skeptic: "When you say you saw the truth of G(F), how can I know that you're doing something a machine can't"
 
-> The anti-mechanist replies: "But this is where Godel comes in! The machine is constrained to a formal system while we are not. Thus, it cannot perceive consistency of PA"
+> The anti-mechanist replies: "This is where Godel comes in--the machine is constrained to a formal system while we are not. Thus, it cannot prove G(F)"
 
 > The skeptic coolly asks: "How do you know you aren't also constrained to a formal system"
 
-> The anti-mechanist retorts: "Because I can see PA's consistency."
+> The anti-mechanist retorts: "Because I can see F's consistency"
 
 > The skeptic replies: "Really? how can you know you're not just, say, assuming its consistency?"
 
-> The anti-mechanist, indignant, exclaims: "I can feel its consistency. The machine, on the other hand, is just shuffling symbols around". 
+> The anti-mechanist, indignant, exclaims: "Because I can feel that F is consistent. The machine, on the other hand, is just shuffling symbols around". 
 
-> To which the age-old rebuttal applies: "How do you know the machine didn't feel that PA is consistent, too?"
+> To which the age-old rebuttal applies: "How do you know the machine didn't feel that F is consistent, too?"
 
 In this way, the Incompleteness-based anti-mechanism argument is just the same age-old anti-mechanism argument that machines can't "feel" as we humans do. Ultimately, it is unsatisfying because there's no way to tell if someone actually ascertains the truth of PA, or if they are just assuming its consistency a priori. If the latter is the case, then if we gave a machine the same freedom to assume consistency of PA, it would also be able to prove G(F). And then the alleged gap between human and machine's capabilities would disappear. In short, it's unclear that we can take the following for granted:
 
