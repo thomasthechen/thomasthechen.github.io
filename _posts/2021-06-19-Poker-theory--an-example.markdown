@@ -16,9 +16,9 @@ Poker is an imperfect information game as players don't know each others' hole c
 Bluffing makes your strategic considerations dependent on your private information and your opponents' strategies. Not only do your strategic considerations become probabilistic (due to a lack of information), they also become "K-level". "What does my opponent think that I think that they have?" is the type of "K-level" thinking that bluffing induces. Thus, to describe what is optimal in poker, we need the following game theoretic concepts:
 
 - expected value (EV)
+- nash equilibrium (NE)
 - best response (BR)
 - exploitability
-- nash equilibrium (NE)
 
 as well as some useful poker-specific concepts:
 - ranges
