@@ -68,7 +68,7 @@ From these definitions, we claim the following.
 
 `Key Theorem:` A relation is r.e. if and only if it is $$\exists\Delta_0$$
 
-Every r.e. relation can be represented by an $$\exists\Delta_0$$ arithmetic formula, and conversely every relation represented by an $$\exists\Delta_0$$ formula is r.e. The proof we leave in the appendix. As we'll see, a stronger version of Godel's first incompleteness theorem essentially follows from this.
+Every r.e. relation can be represented by an $$\exists\Delta_0$$ arithmetic formula, and conversely every relation represented by an $$\exists\Delta_0$$ formula is r.e. The proof we leave in the appendix. As we'll see below, a version of Godel's first incompleteness theorem follows from this key result.
 
 `Corollary:` TA is not r.e.
 
@@ -139,7 +139,7 @@ $$\exists y_1 \forall y_2 \exists y_3 ... Qy_k A(x, y_1, ... y_k)$$
 
 Where the quantifiers alternate between exists and for-all. Note that for $$k \geq 2$$, $$\Sigma_k$$ relations are far more non-computable than the Halting problem (No TM can even hope to recognize such a language). 
 
-Tarski's theorem says: not only is TA not r.e., it is not even arithmetical. TA isn't co-r.e., $$\Sigma_2$$, $$\Sigma_3,... etc.$$, or anything in AH; it is wildly non-computable! Tarski's theorem is far stronger claim about the complexity of TA than Godel's first incompleteness theorem. 
+Tarski's theorem says: not only is TA not r.e., it is not even arithmetical. TA isn't co-r.e., $$\Sigma_2$$, $$\Sigma_3,... etc.$$, or anything in AH; it is wildly difficult to compute! 
 
 `Theorem (Tarski):` TA is not arithmetical.
 
@@ -292,11 +292,11 @@ What is it that lets us reason according to rules we never even formalized? Are 
 
 My second question is around our perception of true and false. Labeling things as true and false is the most intuitive way for us to make sense of the world. Yet, if you examine that closer, perhaps that will begin to seem arbitrary as well. Could we maybe reason in a way so as to assign statements a continuous value, instead of 0/1? Like a "degree of truth." One reply I've received to this question is that although we _can_ develop proof systems where statements take on values besides 0 and 1, it's just simplest to have a true/false value assignment. And simplest is always best! I find this argument mostly believable, but part of me still wonders if perceiving things as true/false is fundementally arbitrary. _Maybe it's not arbitrary to you--what do you think?_
 
-# Why Math Works
+# Complexity of Truth and Why Math Works
 
-Quantitative theories have provided exceptionally accurate predictions about our world--Newtonian mechanics and gravity, quantum mechanics, relativity, groups, games, economics, probability, complexity, quantum computing, etc. As complex as the universe is, several truths about it can be described in terms of some simple axioms, like those used to generate these mathematical theories. That's kind of amazing because it seems like it didn't have to be this way. To what does our universe owe such a luxury? After all, it would also have been conceivable if, instead, the universe was just unintelligibly complex. 
+Quantitative theories have provided exceptionally accurate predictions about our world--Newtonian mechanics and gravity, quantum mechanics, relativity, groups, games, economics, probability, complexity, quantum computing, etc. As complex as the universe is, several truths about it can be described in terms of some simple axioms, like those used to generate these mathematical theories. That's pretty amazing because it seems like it didn't have to be this way. To what does the universe owe such a kindness? I feel it would have been conceivable if, instead, the universe was just unintelligibly complex. 
 
-I suppose there is no answer to why the universe would be inherently simple--just that aspects of it are.  The universe is not maximally complex, and there is _order_ that we can describe using simple axioms. After all, isn't that the founding assumption of mathematics?
+I suppose there is no answer to why the universe would be inherently simple--just that aspects of it are. There is _order_ that we can describe using simple axioms. After all, isn't that the founding assumption of mathematics?
 
 What usually seems amazing is not the axioms themselves, as those often seem fairly self-evident. But the vast array of complex theorems you can derive from them. In PA, the first axiom "There is no number whose successor is 0" is not so amazing by itself, yet theorems you can derive, like Fermat's last theorem, are truly remarkable. Newton's laws are concise, but the array of physical scenarios you can analyze with them (all the Intro Physics exams ever written) seem far more remarkable. Yet, even though we tend to find the axioms' deductions amazing, the axioms themselves do "summarize" all these truths, after all. Thus, perhaps instead we ought to marvel at the axioms for their simplicity, not their consequences.
 
