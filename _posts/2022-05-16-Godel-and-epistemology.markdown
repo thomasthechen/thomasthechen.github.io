@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Incompleteness, Computability, and Epistemology"
+title:  "Incompleteness, Computability, and Philosophy"
 date:   2022-05-16 17:27:18 -0700
 categories: jekyll update
 ---
