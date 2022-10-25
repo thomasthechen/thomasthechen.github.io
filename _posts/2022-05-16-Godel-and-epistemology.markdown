@@ -16,7 +16,9 @@ I hope to cover both the technical and philosophical sides in this post. The tec
 
 # Proof Sketch
 
-A more general version of Godel's first incompleteness result is that TA cannot be _axiomitized_. For any set of axioms, such as PA, there is always some statement in TA that can't be proved from them. Before showing this, we'll first clarify our notation.
+A stronger version of Godel's first incompleteness result is that the language, True Arithmetic (abbreviated TA), cannot be _axiomitized_. What is TA and why is it relevant? On a high level, TA contains all "True" statements formed using the vocabulary of Arithmetic. As we'll see, the fact that TA can't be axiomized is a statement about how complex it is: how we cannot easily capture what statements are (or are not) in TA using a certain types of formulae. At its heart, the first incompleteness result makes a claim about TA's complexity.
+
+We'll see, too, that this formulation of Godel's first incompleteness result implies other (more familiar) consequences. In particular, for any set of axioms (e.g. those constituting PA), there is always some statement in TA that can't be proved from them. Before diving in, we'll first clarify our notation.
 
 `Notation:` 
 - By arithmetic, we mean the set of sentences formed from the vocabulary $$L_A = [0, s, +, \cdot; =]$$. 
