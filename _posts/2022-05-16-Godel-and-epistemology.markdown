@@ -306,7 +306,7 @@ What usually seems amazing is not the axioms themselves, as those often seem fai
 Of course, not all truths are derivable from axioms. TA is too complex to be captured entirely by an axiomitizable theory, as we saw with Godel's first theorem. But all the same, axiomitizable theories do extremely well in describing our world, as theories like ZFC basically capture all mathematics we have so far. So perhaps some truths in the universe are not modeled by simple laws (in fact, maybe 99.99% of them aren't). But even so, the 0.01% of them that are governed by simple laws allow for the highly accurate, elegant theories we have today. And even if the "simply-modelable" slice of truth is actually a miniscule fraction of all truths, they are clearly still exceedingly useful.
 
 
-## Concluding Remarks
+## Final Remarks
 
 To end this post, I wanted to point out how intricately connected CS is to Logic. In my opinion, Incompleteness is among the most elegant mathematical results, and it will take your thoughts to weird and interesting places, even beyond the math itself. To this point, Aaronson once jokingly said that CS ought to be renamed "Quantitative Epistemology," a suggestion I find endearing. 
 

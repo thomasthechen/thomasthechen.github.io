@@ -258,7 +258,7 @@ On the flop, you want to be polarized when you bet, betting your strongest hands
 
 If we check flop and are checked to on the turn, then intuitively the opponent's range is generally weaker than it would be had they bet. Against this weaker range, we can start betting our medium strength hands for value, and our weak draws as bluffs, again with the aim of polarizing.
 
-## Concluding Remarks
+## Final Remarks
 
 The strategy above is a nice starting strategy-- better than "I flopped a pair, so I will bet" or "I will bluff beause I feel like it" strategies. However, it certainly is not optimal. E.g. if your only bluffs on the flop are strong draws (e.g. flush draws), then on turn cards that complete your flush, you suddenly have no bluffs. You just have to play the game more to figure out what other hands you should have in your betting ranges, and how your ranges change when your IP vs OOP, when it's a 3bet pot versus a single raised pot, etc. But hopefully this article gave you a framework to reason about these things so that it's easier to learn from your practice.
 

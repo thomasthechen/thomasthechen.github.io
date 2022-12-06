@@ -55,7 +55,7 @@ From these numbers, it seems that the average risk of skydiving is fairly mild. 
 
 
 
-## Concluding Remarks
+## Final Remarks
 
 I think it's useful to estimate high confidence upper bounds on risk of unfamiliar (and inherently risky) activities. However, ultimately you'd still have to decide whether that risk is tolerable, and it's not clear what that threshold should be (or even if you should live according to a strict threshold). But the calculated risk probably should not be too much higher than the background risk if it's for a recreational activity.
 
