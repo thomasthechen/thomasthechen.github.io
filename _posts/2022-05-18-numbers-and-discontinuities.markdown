@@ -36,7 +36,7 @@ What's special about 2 and 3?
 
 ## Other Interesting Examples
 
-Before attempting to answer that question, I want to argue that this phenomena isn't something confined to the monastic theory of complexity. Here are some other more tangible problems where there is a discontinuity in behavior between 2 and 3. Because these problems aren't rigorously connected to a notion of "complexity", I won't claim that the phenomena we see here is the same as we saw with the jump in complexity in the previous section. However, in all these cases 3 seems to be the minimal parameter where the problem's behavior changes fundementally.
+Before attempting to answer that question, I want to argue that this phenomena isn't something confined to the theory of complexity. Here are some other more tangible problems where there is a discontinuity in behavior between 2 and 3. Because these problems aren't rigorously connected to a notion of "complexity", I won't claim that the phenomena we see here is the same as we saw with the jump in complexity in the previous section. However, in all these cases 3 seems to be the minimal parameter where the problem's behavior changes fundementally.
 
 _Three body problem_ - When we have isolated two bodies interacting through gravitation, they follow a stable elliptical orbit around their center of mass (E.g. 2 stars in a "binary star"). But as soon as we introduce a third body, the orbit becomes chaotic and irregular. We no longer have a nice elliptical orbit, but have something unpredictable, sensitive to initial conditions, and analytically unsolvable, apparently. 
 
