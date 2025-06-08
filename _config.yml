@@ -13,8 +13,11 @@ title                    : "Thomas Chen"
 title_separator          : "-"
 name                     : &name "Thomas Chen"
 description              : &description "CS Ph.D. student at Stanford"
-url                      : https://thomasthechen.github.io # the base hostname & protocol for your site e.g. "https://[your GitHub username].github.io" or if you already have some other page hosted on Github then use "https://[your GitHub username].github.io/[Your Repo Name]"
-baseurl                  : "" # the subpath of your site, e.g. "/blog"
+# url                      : https://thomasthechen.github.io # the base hostname & protocol for your site e.g. "https://[your GitHub username].github.io" or if you already have some other page hosted on Github then use "https://[your GitHub username].github.io/[Your Repo Name]"
+# baseurl                  : "" # the subpath of your site, e.g. "/blog"
+
+url: "https://thomas-chen.com"   # your custom domain
+baseurl: ""
 repository               : "thomasthechen/thomasthechen.github.io"
 
 # Site Author - The following control what appear as part of the author content on the side bar.
