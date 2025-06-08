@@ -20,7 +20,7 @@ ICML 2025
 
 [Testing and Learning Quantum Juntas Nearly Optimally](https://epubs.siam.org/doi/pdf/10.1137/1.9781611977554.ch43)
 <br>
-**Thomas Chen**, Shivam Nadimpallli, Henry Yuen
+**Thomas Chen**, Shivam Nadimpalli, Henry Yuen
 <br>
 SODA 2023, QIP 2023
 
